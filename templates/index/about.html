@@ -1,0 +1,52 @@
+{% extends 'base.html' %}{% block layouts %}{% load static %}
+<header class="py-5 bg-light border-0 mb-4">
+  <div class="container">
+    <div class="my-5">
+      <h1 class="fw-bolder">Welcome to Blog Home!</h1>
+      <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+    </div>
+  </div>
+</header>
+
+<div class="card m-4 w-100% border-0">
+  <!--<a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>-->
+  <div class="card-body">
+    <h3 class="card-title">Tentando construir um pedaço de Solução bugs de Angola</h3>
+    <p class="card-text">
+      Tudo está com um ruído tão grande, é tanta falhas e oferta em aplicações de serviços em Angola, predadores prontos para atacar – e a gente ali, no meio dessa confusão toda,
+      tentando extrair algum valor para divulgar falhas, soluções e boas praticas de segurança.
+    </p>
+  </div>
+</div>
+<ion-icon name="share-social-outline"></ion-icon>
+<div class="row row-cols-1 row-cols-md-3 g-4 p-4">
+  <div class="col">
+    <div class="card h-100">
+      <!-- <img src="..." class="card-img-top" alt="..." />-->
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <!--<img src="..." class="card-img-top" alt="..." />-->
+      <div class="card-body">
+        <h5 class="card-title">Feito para você</h5>
+        <p class="card-text">This is a short card.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <!-- <img src="..." class="card-img-top" alt="..." />-->
+      <div class="card-body">
+        <h5 class="card-title">Protege você</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
