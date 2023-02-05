@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'ajax',
     'index',
     'bug',
+    'utilizador',
 ]
 
 MIDDLEWARE = [
