@@ -22,10 +22,10 @@ class Utilizador(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE, parent_link=True)
     categoria= models.ForeignKey(Categoria, on_delete=models.CASCADE, parent_link=True)
     genero = models.ForeignKey(Genero, on_delete=models.CASCADE, parent_link=True)
-    data_nascimento=models.CharField(max_length=20,blank=True, null=True)
+    data_nascimento=models.DateField()
     ndi = models.CharField(max_length=40,blank=True, null=True)
     telefone = models.CharField(max_length=50,blank=True, null=True)
-    foto = models.ImageField(upload_to='user/%d-%m-%y/', blank=True, null=True, default="user.jpg")
+    foto = models.ImageField(upload_to='uploads/%d-%m-%y/', blank=True, null=True, default="user.jpg")
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     
