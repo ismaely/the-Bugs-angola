@@ -5,3 +5,7 @@ db.sqlite3
 *.env
 *.txt
 .vscode
+*.jpg
+*.png
+*.PNG
+*.pdf
