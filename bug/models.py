@@ -5,19 +5,19 @@ from django.contrib.auth.models import User
 class EstadoBug(models.Model):
     estado = models.CharField(max_length=150)
     def __str__ (self):
-        return "%s" % (self.estado)
+        return self.id
 
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=150)
     def __str__ (self):
-        return "%s" % (self.nome)
+        return self.id
 
 
 class Tipo(models.Model):
     nome = models.CharField(max_length=150)
     def __str__ (self):
-        return "%s" % (self.nome)
+        return self.id
 
 
 class Bug(models.Model):
