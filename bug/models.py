@@ -5,19 +5,18 @@ from django.contrib.auth.models import User
 class EstadoBug(models.Model):
     estado = models.CharField(max_length=150)
     def __str__ (self):
-        return self.id
+        return '%s' % self.estado
 
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=150)
     def __str__ (self):
-        return self.id
-
+        return '%s' % self.nome
 
 class Tipo(models.Model):
     nome = models.CharField(max_length=150)
     def __str__ (self):
-        return self.id
+        return '%s' % self.nome
 
 
 class Bug(models.Model):
@@ -34,7 +33,8 @@ class Bug(models.Model):
     class Meta:
         ordering = ['titulo']
     def __str__ (self):
-        return self.id
+        return '%d' % self.id
+
 
 class Imagem(models.Model):
     titulo = models.CharField(max_length=170, blank=True, null=True)

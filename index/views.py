@@ -1,10 +1,12 @@
 from django.shortcuts import render
+from bug.models import Categoria, Tipo, EstadoBug, Bug
 
 # bug
 
 def index(request):
    
-    context = {}
+    lista = Bug.objects.select_related('estado').all().order_by('titulo')
+    context = {'lista': lista}
     return render(request, 'index/index.html', context)
 
 
