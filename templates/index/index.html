@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% block layouts %}{% load static %}
 <div class="list-group list-group-flush m-5">
   {% for dados in lista %}
-  <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+  <a href="{% url 'index:detail' dados.id %}" class="list-group-item list-group-item-action" aria-current="true">
     <div class="d-flex justify-content-between">
       <h5 class="mb-1">{{ dados.titulo|title }}</h5>
       <small>{{ dados.dataPublicacao }}</small>

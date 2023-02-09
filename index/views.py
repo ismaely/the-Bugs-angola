@@ -3,6 +3,14 @@ from bug.models import Categoria, Tipo, EstadoBug, Bug
 
 # bug
 
+def detail(request, pk):
+    context = dict()
+    if pk > 0:
+      resp = Bug.objects.get(id=pk)
+      context = {'resp':resp} 
+    return render(request, 'index/detalhe.html', context)
+
+
 def index(request):
    
     lista = Bug.objects.select_related('estado').all().order_by('titulo')
