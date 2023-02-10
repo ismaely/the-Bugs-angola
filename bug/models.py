@@ -45,4 +45,4 @@ class Imagem(models.Model):
     bug = models.ForeignKey(Bug, on_delete=models.SET_NULL, null=True,parent_link=True)
 
     def __str__ (self):
-        return self.id
+        return '%d' % self.id
