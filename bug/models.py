@@ -38,7 +38,7 @@ class Bug(models.Model):
 
 class Imagem(models.Model):
     titulo = models.CharField(max_length=170, blank=True, null=True)
-    descricao = models.TextField(blank=True, null=True)
+    content = models.TextField()
     arquivos = models.FileField(upload_to="uploads/%d-%m-%yyyy/",blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)

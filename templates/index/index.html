@@ -6,7 +6,7 @@
       <h5 class="mb-1">{{ dados.titulo|title }}</h5>
       <small>{{ dados.dataPublicacao }}</small>
     </div>
-    <p class="mb-1">.{{ dados.descricao|striptags|truncatewords:33 }}</p>
+    <p class="mb-1">{{ dados.descricao|safe }}</p>
     <small>Categoria: <b>{{ dados.categoria }}</b></small>
   </a>
   {% endfor %}
