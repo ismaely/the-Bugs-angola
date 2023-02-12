@@ -9,6 +9,6 @@ urlpatterns = [
     path('contact/', views.contact, name="contact"),
     path('termsOfUse/', views.termsOfUse, name="termsOfUse"),
     path('loginUser/', views.loginUser, name="loginUser"),
-    path('detail/<int:pk>/', views.detail, name="detail"),
+    path('detail/<slug:slug>/', views.detail, name="detail"),
   
 ]

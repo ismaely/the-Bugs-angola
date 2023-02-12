@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
+from datetime import date
 # Create your models here.
 
+DATAS = date.today
 class EstadoBug(models.Model):
     estado = models.CharField(max_length=150)
     def __str__ (self):
@@ -31,16 +33,18 @@ class Bug(models.Model):
     #imagem = models.ImageField(upload_to="imagem/%d-%m-%yyyy/", blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
-    slug = models.SlugField(null=True, blank=True)
+    slug = models.SlugField(max_length=400,null=True, blank=True)
     class Meta:
-        ordering = ['titulo']
+        ordering = ['-created']
 
     def __str__ (self):
         return '%d' % self.id
     
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.titulo)
+            self.slug = slugify(self.titulo +'-'+ str(DATAS))
+        elif not self.slug:
+            self.slug = slugify(self.titulo +'-'+ str(DATAS))
 
         super(Bug, self).save(*args, **kwargs)
 
