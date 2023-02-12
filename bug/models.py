@@ -42,9 +42,9 @@ class Bug(models.Model):
     
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.titulo +'-'+ str(DATAS))
+            self.slug = slugify(self.titulo)
         elif not self.slug:
-            self.slug = slugify(self.titulo +'-'+ str(DATAS))
+            self.slug = slugify(self.titulo)
 
         super(Bug, self).save(*args, **kwargs)
 

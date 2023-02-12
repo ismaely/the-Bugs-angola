@@ -1,14 +1,12 @@
-{% extends 'base.html' %}{% block layouts %}{% load static %}
-<div class="list-group list-group-flush m-5">
-  {% for dados in lista %}
+{% extends 'base.html' %}{% block layouts %}{% load static %} {% for dados in lista %}
+<div class="list-group list-group-flush m-2">
   <a href="{% url 'index:detail' dados.slug %}" class="list-group-item list-group-item-action" aria-current="true">
     <div class="d-flex justify-content-between">
       <h5 class="mb-1">{{ dados.titulo|title }}</h5>
       <small>{{ dados.dataPublicacao }}</small>
     </div>
-    <p class="mb-1">{{ dados.descricao|safe }}</p>
+    <p class="mb-1">{{ dados.descricao|safe|truncatewords_html:41}}</p>
     <small>Categoria: <b>{{ dados.categoria }}</b></small>
   </a>
-  {% endfor %}
 </div>
-{% endblock %}
+{% endfor %} {% endblock %}

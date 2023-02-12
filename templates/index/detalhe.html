@@ -2,9 +2,10 @@
 <div class="card-box task-detail mb-8">
   <div class="media mt-4">
     <img class="d-flex mr-3 rounded-circle" alt="64x64" src="{% static 'img/user.png' %}" style="width: 48px; height: 48px" />
-    <div class="media-body">
+    <div class="media-body mb-3">
       <h5 class="media-heading mb-0 mt-0">{{ resp.autor|safe }}</h5>
-      <!--<span class="badge badge-danger">Urgent</span>-->
+
+      <span class="">Data: {{ resp.dataPublicacao|date:"d M Y" }}</span>
     </div>
   </div>
   <h4 class="m-b-20">{{ resp.titulo|safe }}</h4>
