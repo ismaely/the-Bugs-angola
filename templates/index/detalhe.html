@@ -8,7 +8,7 @@
       <span class="">Data: {{ resp.dataPublicacao|date:"d M Y" }}</span>
     </div>
   </div>
-  <h4 class="m-b-20">{{ resp.titulo|safe }}</h4>
+  <h4 class="m-b-20">{{ resp.titulo|safe|title }}</h4>
   <p class="text-muted">{{ resp.descricao|safe }}</p>
   <p class="text-muted"></p>
 

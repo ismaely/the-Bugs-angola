@@ -4,7 +4,7 @@ from django.template.defaultfilters import slugify
 from datetime import date
 # Create your models here.
 
-DATAS = date.today
+
 class EstadoBug(models.Model):
     estado = models.CharField(max_length=150)
     def __str__ (self):
@@ -42,9 +42,9 @@ class Bug(models.Model):
     
     def save(self, *args, **kwargs):
         if not self.id:
-            self.slug = slugify(self.titulo)
+            self.slug = slugify(self.titulo+'-'+str(date.today()))
         elif not self.slug:
-            self.slug = slugify(self.titulo)
+            self.slug = slugify(self.titulo+'-'+str(date.today()))
 
         super(Bug, self).save(*args, **kwargs)
 
