@@ -9,6 +9,10 @@ def detail(request, slug):
     return render(request, 'index/detalhe.html', context)
 
 
+def soluction(request):
+    context = {}
+    return render(request, 'index/soluction.html', context)
+
 def index(request):
    
     lista = Bug.objects.select_related('estado').all().order_by('-created')
