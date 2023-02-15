@@ -8,13 +8,14 @@ def detail(request, slug):
     context = {'resp':resp} 
     return render(request, 'index/detalhe.html', context)
 
-
+# the method that will list all soluction in system
 def soluction(request):
-    context = {}
+    resp = Bug.objects.select_related('tipo').filter(tipo=4)
+    context = {'lista':resp} 
     return render(request, 'index/soluction.html', context)
 
+
 def index(request):
-   
     lista = Bug.objects.select_related('estado').all().order_by('-created')
     context = {'lista': lista}
     return render(request, 'index/index.html', context)
