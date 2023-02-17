@@ -1,12 +1,19 @@
 from django.shortcuts import render
 from bug.models import Categoria, Tipo, EstadoBug, Bug
 
-# bug
 
+
+
+def internacional(request):
+    context = {}
+    return render(request, 'index/internacional.html',context)
+
+    
 def detail(request, slug):
     resp = Bug.objects.get(slug=slug)
     context = {'resp':resp} 
     return render(request, 'index/detalhe.html', context)
+
 
 # the method that will list all soluction in system
 def soluction(request):
@@ -39,5 +46,3 @@ def termsOfUse(request):
 def loginUser(request):
     context = {}
     return render(request, 'index/login.html', context)
-
-# don't sleep
