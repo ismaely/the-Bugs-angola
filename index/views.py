@@ -42,7 +42,3 @@ def termsOfUse(request):
     context = {}
     return render(request, 'index/termsOfUse.html', context)
 
-
-def loginUser(request):
-    context = {}
-    return render(request, 'index/login.html', context)
