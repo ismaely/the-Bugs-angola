@@ -25,8 +25,11 @@
       </div>-->
       <div class="col-md-8 col-lg-8 col-xl-6 offset-xl-1">
         <form action="{% url 'utilizador:loginUser' %}" method="POST">
+          {% csrf_token %} {% autoescape on %}
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-            <p class="lead fw-normal mb-0 me-3"></p>
+            {% if messages %} {% for message in messages %}
+            <p class="lead fw-normal mb-0 me-3 text-danger">{{ message }}</p>
+            {% endfor %} {% endif %}
           </div>
 
           <div class="divider d-flex align-items-center my-4">
@@ -56,6 +59,7 @@
           <div class="text-center text-lg-start mt-4 pt-2">
             <button type="submit" class="col-sm-12 col-md-12 col-lg-12 btn btn-success btn-lg btn-block">Sign in</button>
           </div>
+          {% endautoescape %}
         </form>
       </div>
     </div>
