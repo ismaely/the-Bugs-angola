@@ -5,6 +5,8 @@ from django.contrib.auth.hashers import check_password
 from django.urls import reverse, path
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+from django.conf import settings
 from utilizador.forms import LoginForm
 from utilizador.models import Utilizador
 
@@ -23,7 +25,7 @@ def loginUser(request):
                 if resp.email == nome and password:
                     conta = Utilizador.objects.get(user_id=resp.id)
                     if resp.is_active:
-                        user = authenticate(email=nome, password=senha)
+                        user = authenticate(request, email=nome, password=senha)
                         login(request, user)
                         #request.session.set_expiry(31000) # a session vai terminar em 24 horas
                         return HttpResponseRedirect(reverse('bug:home'))
@@ -33,3 +35,9 @@ def loginUser(request):
 
     context = {'form':form,}
     return render (request, 'utilizador/login.html', context)
+
+
+# def to logout in system
+def logoutUser(request):
+    logout(request)
+    return redirect(f'{settings.LOGOUT_REDIRECT_URL}?next={request.path}')

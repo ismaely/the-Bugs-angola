@@ -62,7 +62,7 @@
                 /></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                   <a class="dropdown-item" href="#"><i class="ik ik-user dropdown-icon"></i> Profile</a>
-                  <a class="dropdown-item" href="#"><i class="ik ik-power dropdown-icon"></i> Logout</a>
+                  <a class="dropdown-item" href="{% url 'utilizador:logoutUser' %}"><i class="ik ik-power dropdown-icon"></i> Logout</a>
                 </div>
               </div>
             </div>
@@ -71,6 +71,7 @@
       </header>
 
       <div class="page-wrap">
+        {% if user.is_authenticated %}
         <div class="app-sidebar colored">
           <div class="sidebar-header">
             <a class="header-brand" href="{% url 'bug:home' %}">
@@ -135,6 +136,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
         <div class="main-content">
           <div class="container-fluid">
             <div class="row">
