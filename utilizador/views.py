@@ -14,25 +14,29 @@ from utilizador.models import Utilizador
 
 
 def loginUser(request):
-    form = LoginForm(request.POST or None)
     if request.method == 'POST':
+        form = LoginForm(request.POST)
         try:
             if form.is_valid():
                 senha = form.cleaned_data.get('password')
                 nome = form.cleaned_data.get('email')
                 resp = User.objects.get(email=nome)
+                print(nome)
+                print(resp.email)
+                pass
                 password = check_password(senha, resp.password)
                 if resp.email == nome and password:
-                    conta = Utilizador.objects.get(user_id=resp.id)
+                    #conta = Utilizador.objects.get(user_id=resp.id)
                     if resp.is_active:
-                        user = authenticate(request, email=nome, password=senha)
+                        user = authenticate(request,email=nome, password=senha)
                         login(request, user)
                         #request.session.set_expiry(31000) # a session vai terminar em 24 horas
                         return HttpResponseRedirect(reverse('bug:home'))
                 messages.warning(request, 'Dados da conta errado')
         except User.DoesNotExist:
             messages.warning(request, 'A conta não existe..')
-
+    else:
+        form = LoginForm(request.POST or None)
     context = {'form':form,}
     return render (request, 'utilizador/login.html', context)
 
@@ -40,4 +44,4 @@ def loginUser(request):
 # def to logout in system
 def logoutUser(request):
     logout(request)
-    return redirect(f'{settings.LOGOUT_REDIRECT_URL}?next={request.path}')
+    return redirect('/')
