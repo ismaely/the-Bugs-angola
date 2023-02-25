@@ -10,8 +10,6 @@ class Genero(models.Model):
         return "%s" % (self.nome)
 
 
-
-
 # Model for User
 class Utilizador(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE, parent_link=True)

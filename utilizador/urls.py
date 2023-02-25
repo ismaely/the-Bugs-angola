@@ -5,5 +5,6 @@ from . import views
 app_name = 'utilizador'
 urlpatterns = [
     path('logoutUser/', views.logoutUser, name="logoutUser"),
+    path('adicionar_categoria/', views.add_categoria, name="add_categoria"),
 
 ]

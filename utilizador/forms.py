@@ -8,7 +8,8 @@ class LoginForm(forms.Form):
     password = forms.CharField(max_length=20, widget=forms.PasswordInput(attrs={'class': 'form-control form-control-lg','placeholder':'Enter password' }))
 
 
-
+class CategoriaForm(forms.Form):
+    nome= forms.CharField(max_length=80, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
 
@@ -22,7 +23,6 @@ class Utilizador_Form(ModelForm):
         fields = ['genero', 'data_nascimento','ndi', 'telefone']
         widgets = {
             'genero': forms.Select(attrs={'class': 'form-control'}),
-            
         }
 
   
