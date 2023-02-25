@@ -12,4 +12,6 @@ urlpatterns = [
     path('detail/<slug:slug>/', views.detail, name="detail"),
     path('soluction/', views.soluction, name="soluction"),
     path('internacional/', views.internacional, name="internacional"),
+    path('loginUser/', views.loginUser, name="loginUser"),
+    path('accounts/login/', views.loginUser, name='login'),
 ]
