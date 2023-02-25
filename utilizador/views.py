@@ -21,17 +21,15 @@ def loginUser(request):
                 senha = form.cleaned_data.get('password')
                 nome = form.cleaned_data.get('email')
                 resp = User.objects.get(email=nome)
-                print(nome)
-                print(resp.email)
-                pass
                 password = check_password(senha, resp.password)
+                
                 if resp.email == nome and password:
                     #conta = Utilizador.objects.get(user_id=resp.id)
+                    user = authenticate(request,email=resp.email,password=senha)
                     if resp.is_active:
-                        user = authenticate(request,email=nome, password=senha)
-                        login(request, user)
-                        #request.session.set_expiry(31000) # a session vai terminar em 24 horas
-                        return HttpResponseRedirect(reverse('bug:home'))
+                        #login(request, user)
+                        return redirect('bug:home')
+                        #return HttpResponseRedirect(reverse('bug:home'))
                 messages.warning(request, 'Dados da conta errado')
         except User.DoesNotExist:
             messages.warning(request, 'A conta não existe..')
