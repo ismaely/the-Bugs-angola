@@ -59,16 +59,14 @@ def loginUser(request):
         try:
             if form.is_valid():
                 senha = form.cleaned_data.get('password')
-                nome = form.cleaned_data.get('email')
-                resp = User.objects.get(email=nome)
+                nome = form.cleaned_data.get('username')
+                resp = User.objects.get(username=nome)
                 password = check_password(senha, resp.password)
-                
-                if resp.email == nome and password:
+                if resp.username == nome and password:
                     #conta = Utilizador.objects.get(user_id=resp.id)
-                    
                     if resp.is_active:
-                        user = authenticate(request,email=resp.email,password=senha)
-                        #login(request, user)
+                        user = authenticate(username=nome,password=senha)
+                        login(request, user)
                         #request.session.set_expiry(31000)
                         return HttpResponseRedirect(reverse('bug:home'))
                 messages.warning(request, 'Dados da conta errado')
