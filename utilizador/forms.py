@@ -9,7 +9,7 @@ class LoginForm(forms.Form):
 
 
 class CategoriaForm(forms.Form):
-    nome= forms.CharField(max_length=80, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    nome= forms.CharField(max_length=80, min_length=4, widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
 

@@ -17,16 +17,18 @@ def add_categoria(request):
     form = CategoriaForm(request.POST or None)
     if request.method == 'POST':
         try:
+            resp = Group.objects.get(name=request.POST['nome'])
+            if resp is not None:
+                messages.warning(request, 'A categoria já existe no sistema')
+        except Group.DoesNotExist:
             if form.is_valid():
-                user = Group.objects.create_group(name=request.POST['nome'])
-                form.save()
+                Group.objects.create(name=request.POST['nome'])
+                messages.success(request, 'Categoria criado com sucesso')
                 form = CategoriaForm()
-
-        except Exception as e:
-           messages.warning(request, 'A conta não existe..')
-
+    
     context = {'form': form}
     return render(request, 'utilizador/add_categoria.html', context)
+
 
 
 @login_required
