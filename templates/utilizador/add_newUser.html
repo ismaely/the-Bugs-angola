@@ -1,0 +1,185 @@
+{% extends 'baseHome.html' %}{% block corpo %}{% load static %}
+<div class="row">
+  <div class="col-md-12">
+    {% if messages %}
+    <script language="JavaScript">
+      $(function () {
+        $("#exampleModalCenter").modal("show");
+      });
+    </script>
+
+    {% endif %}
+    <div class="card">
+      <div class="card-header"><h3>Criar conta de Utilizador</h3></div>
+      <div class="card-body">
+        <form id="regForm" class="forms-sample" action="#" method="POST" enctype="multipart/form-data">
+          {% csrf_token %} {% autoescape on %}
+          <div class="all-steps" id="all-steps"><span class="step"></span> <span class="step"></span> <span class="step"></span> <span class="step"></span></div>
+          <div class="tab">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Nome da Instituição<span class="text-danger">*</span></label>
+                  {{ form.nome }} <span class="text-danger">{{ form.nome.errors }}</span>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Nº BI<span class="text-danger">*</span></label>
+                  {{ form.ndi }} {{ form.ndi.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Localização</label>
+                  {{ form.localizacao }} {{ form.localizacao.errors }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Data de Abertura</label>
+                  {{ form.data_inicio }} {{ form.data_inicio.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Mercado<span class="text-danger">*</span></label>
+                  {{ form.mercado }} {{ form.mercado.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Provincia <span class="text-danger">*</span></label>
+                  {{ form.provincia }} {{ form.provincia.errors }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Municipio<span class="text-danger">*</span></label>
+                  {{ form.municipio }} {{ form.municipio.errors }}
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Tipo de Actividade:<span class="text-danger"></span></label>
+                  {{ form.tipoActividade }} {{ form.tipoActividade.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Telefone</label>
+                  {{ form.telefone }} {{ form.telefone.errors }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Email:<span class="text-danger"></span></label>
+                  {{ form.email }} {{ form.email.errors }}
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Data de Entrada:<span class="text-danger"></span></label>
+                  {{ form.dataRegistro }} {{ form.dataRegistro.errors }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Segundo fase-->
+
+          <div class="tab">
+            <div class="row">
+              <div class="col-md-4">
+                <h4>Tira Fotografia</h4>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="profile-pic mb-5">
+                      <!--<img src="../img/user.jpg" width="150" class="rounded-circle" alt="user" />-->
+                      <div id="my_camera"></div>
+                    </div>
+                  </div>
+                  <div class="p-4 border-top mt-4">
+                    <div class="row text-center">
+                      <div class="col-6 border-right">
+                        <a href="#" class="link d-flex align-items-center justify-content-center" onClick="configure()">
+                          <i class="ik ik-message-square f-20 mr-5"></i>Ligar Camera
+                        </a>
+                      </div>
+                      <div class="col-6">
+                        <a href="#" class="link d-flex align-items-center justify-content-center" onClick="take_snapshot()"><i class="ik ik-box f-20 mr-5"></i>Foto</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                {{ form.foto }}
+                <h4></h4>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="profile-pic mb-20">
+                      <!-- -->
+                      <div id="results"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <h4></h4>
+                <div class="card">
+                  <div class="card-body text-center">
+                    <div class="profile-pic mb-20">
+                      <!-- -->
+                      <div id="result"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="overflow: auto" id="nextprevious">
+            <div style="float: right">
+              <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button> <button type="button" id="nextBtn" onclick="nextPrev(1)">Proximo</button>
+            </div>
+          </div>
+          {% endautoescape %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      {% for message in messages %} {% if message.tags == 'warning' %}
+      <div class="modal-header widget bg-danger">
+        {% else %}
+        <div class="modal-header widget bg-success">
+          {% endif %}
+          <h5 class="modal-title" id="exampleModalCenterLabel">Notificação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body"><strong>{{ message }}</strong> <br /></div>
+        {% endfor %}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

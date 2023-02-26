@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser, User, Group
 
 
 class Genero(models.Model):
@@ -10,6 +10,8 @@ class Genero(models.Model):
         return "%s" % (self.nome)
 
 
+
+
 # Model for User
 class Utilizador(models.Model):
     user= models.ForeignKey(User, on_delete=models.CASCADE, parent_link=True)
@@ -17,7 +19,8 @@ class Utilizador(models.Model):
     data_nascimento=models.DateField(blank=True, null=True)
     ndi = models.CharField(max_length=40,blank=True, null=True)
     telefone = models.CharField(max_length=50,blank=True, null=True)
-    foto = models.ImageField(upload_to='uploads/%d-%m-%y/', blank=True, null=True, default="user.jpg")
+    estadoPassword = models.BooleanField(default=False)
+    foto = models.ImageField(upload_to='uploads/foto/%d-%m-%y/', blank=True, null=True, default="user.jpg")
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     

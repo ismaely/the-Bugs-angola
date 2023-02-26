@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'index',
     'bug',
     'utilizador',
+    
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,8 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+#AUTH_USER_MODEL = 'utilizador.CustomUser'
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 INSTALLED_APPS += ('django_summernote', )
