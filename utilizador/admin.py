@@ -4,7 +4,7 @@ from utilizador.models import Genero, Utilizador
 # Register your models here.
 
 class UtilizadorAdmin(admin.ModelAdmin):
-    list_display=('user', 'genero', 'data_nascimento','ndi','telefone')
+    list_display=('user', 'genero', 'data_nascimento','ndi','telefone','estadoPassword')
     ordering = ['created']
 
 

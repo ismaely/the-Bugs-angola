@@ -12,15 +12,15 @@
     <div class="card">
       <div class="card-header"><h3>Criar conta de Utilizador</h3></div>
       <div class="card-body">
-        <form id="regForm" class="forms-sample" action="#" method="POST" enctype="multipart/form-data">
+        <form id="regForm" class="forms-sample" action="{% url 'utilizador:novo-utilizador' %}" method="POST" enctype="multipart/form-data">
           {% csrf_token %} {% autoescape on %}
           <div class="all-steps" id="all-steps"><span class="step"></span> <span class="step"></span> <span class="step"></span> <span class="step"></span></div>
           <div class="tab">
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="exampleInputEmail3">Nome da Instituição<span class="text-danger">*</span></label>
-                  {{ form.nome }} <span class="text-danger">{{ form.nome.errors }}</span>
+                  <label for="exampleInputEmail3">Nome completo<span class="text-danger">*</span></label>
+                  {{ form2.full_name }} <span class="text-danger">{{ form2.full_name.errors }}</span>
                 </div>
               </div>
 
@@ -32,8 +32,8 @@
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="exampleInputEmail3">Localização</label>
-                  {{ form.localizacao }} {{ form.localizacao.errors }}
+                  <label for="exampleInputEmail3">Data de Nascimento</label>
+                  {{ form.data_nascimento }} {{ form.data_nascimento.errors }}
                 </div>
               </div>
             </div>
@@ -41,57 +41,29 @@
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="exampleInputEmail3">Data de Abertura</label>
-                  {{ form.data_inicio }} {{ form.data_inicio.errors }}
+                  <label for="exampleInputEmail3">Genero</label>
+                  {{ form.genero }} {{ form.genero.errors }}
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="exampleInputEmail3">Mercado<span class="text-danger">*</span></label>
-                  {{ form.mercado }} {{ form.mercado.errors }}
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="exampleInputEmail3">Provincia <span class="text-danger">*</span></label>
-                  {{ form.provincia }} {{ form.provincia.errors }}
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="exampleInputEmail3">Municipio<span class="text-danger">*</span></label>
-                  {{ form.municipio }} {{ form.municipio.errors }}
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="exampleInputEmail3">Tipo de Actividade:<span class="text-danger"></span></label>
-                  {{ form.tipoActividade }} {{ form.tipoActividade.errors }}
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="exampleInputEmail3">Telefone</label>
+                  <label for="exampleInputEmail3">Nº Telefone<span class="text-danger">*</span></label>
                   {{ form.telefone }} {{ form.telefone.errors }}
                 </div>
               </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="exampleInputEmail3">Email<span class="text-danger">*</span></label>
+                  {{ form2.email }} {{ form2.email.errors }}
+                </div>
+              </div>
             </div>
 
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
-                  <label for="exampleInputEmail3">Email:<span class="text-danger"></span></label>
-                  {{ form.email }} {{ form.email.errors }}
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label for="exampleInputEmail3">Data de Entrada:<span class="text-danger"></span></label>
-                  {{ form.dataRegistro }} {{ form.dataRegistro.errors }}
+                  <label for="exampleInputEmail3">Username de Login<span class="text-danger">*</span></label>
+                  {{ form2.username}} {{ form2.username.errors }}
                 </div>
               </div>
             </div>
