@@ -8,8 +8,18 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from AOBug.settings import env
+from django.utils import timezone
+import random, base64
 from utilizador.forms import CategoriaForm, Utilizador_Form, User_Form
 from utilizador.models import Utilizador
+
+
+@login_required
+def list_users(request):
+    #list_user = User.objects.select_related('user').filter(Q(estudante__pessoa__passaporte=bi) )
+    list_user = User.objects.all()
+    context = {'lista': list_user}
+    return render(request, 'utilizador/list_users.html', context)
 
 
 @login_required
@@ -63,6 +73,25 @@ def add_newUser(request):
     context = {'form': form,'form2': form2}
     return render(request, 'utilizador/add_newUser.html', context)
 
+
+
+# função responsavel por tratar da foto 
+@login_required
+def prepara_foto(request):
+    img = request.POST["foto"]
+    nome = str(timezone.now()).split('.')
+    foto = []
+    inicio = img.find(',')
+    imagem = img[inicio+1:]
+
+    with open("./media/uploads/foto/"+ str(nome[0]) + "_" + str(random.random()) + ".png", "wb") as fh:
+        fh.write(base64.b64decode(imagem))
+        foto = str(fh).split('=')
+        um = foto[1].replace(">", '')
+
+    um = um.replace("'", '')
+    um = um.split('media/')
+    return um[1]
 
 
 # def to logout in system

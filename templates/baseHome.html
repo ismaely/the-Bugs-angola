@@ -105,7 +105,7 @@
                   <a href="#"><i class="ik ik-user"></i><span></span></a>
                   <div class="submenu-content">
                     <a href="{% url 'utilizador:novo-utilizador' %}" class="menu-item">Nova Conta</a>
-                    <a href="" class="menu-item">Listar Contas</a>
+                    <a href="{% url 'utilizador:list-users' %}" class="menu-item">Listar Contas</a>
                     <a href="" class="menu-item">Consultar</a>
                     <a href="{% url 'utilizador:add_categoria' %} " class="menu-item">Nova Categoria</a>
                     <a href="" class="menu-item">Definir Previlegios a Categoria </a>
@@ -162,11 +162,10 @@
     </div>
 
     <script src="{% static '/home/plugins/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-    <script src="{% static '/home/dist/js/webcam.js' %}"></script>
+    <!--<script src="{% static '/home/dist/js/webcam.js' %}"></script>-->
     <script src="{% static '/home/dist/js/html2pdf.bundle.min.js' %}"></script>
     <script src="{% static '/home/dist/js/sweetalert2.js' %}"></script>
     <script src="{% static '/home/plugins/jquery-toast-plugin/dist/jquery.toast.min.js' %}"></script>
-    <script src="{% static '/home/js/alerts.js' %}"></script>
     <!--<script src="{% static '/dist/js/pdf.min.js' %}"></script>-->
 
     <script src="{% static '/home/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js' %}"></script>
@@ -177,6 +176,7 @@
     <script src="{% static '/home/plugins/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
     <script src="{% static '/home/plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>
     <script src="{% static '/home/plugins/moment/moment.js' %}"></script>
+
     <!--<script src="{% static '/plugins/d3/dist/d3.min.js' %}"></script>
     <script src="{% static '/plugins/c3/c3.min.js' %}"></script>-->
     <script src="{% static '/home/dist/js/tables.js' %}"></script>
@@ -185,5 +185,6 @@
     <script src="{% static '/home/dist/js/help/foto.js' %}"></script>
     <script src="{% static '/home/dist/js/help/request.js' %}"></script>
     <script src="{% static '/home/dist/js/theme.min.js' %}"></script>
+    <script src="{% static '/home/dist/js/datatables.js' %}"></script>
   </body>
 </html>
