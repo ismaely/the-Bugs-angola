@@ -23,6 +23,14 @@ def list_users(request):
 
 
 @login_required
+def profil_user(request, slug):
+    #list_user = User.objects.select_related('user').filter(Q(estudante__pessoa__passaporte=bi) )
+    list_user = User.objects.all()
+    context = {'lista': list_user}
+    return render(request, 'utilizador/profil_user.html', context)
+
+
+@login_required
 def add_categoria(request):
     form = CategoriaForm(request.POST or None)
     if request.method == 'POST':

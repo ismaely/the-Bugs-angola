@@ -61,7 +61,7 @@
                   ><img class="avatar" src="{% static 'img/user.png' %}" alt=""
                 /></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                  <a class="dropdown-item" href="#"><i class="ik ik-user dropdown-icon"></i> Profile</a>
+                  <a class="dropdown-item" href="{% url 'utilizador:profil-user' %}"><i class="ik ik-user dropdown-icon"></i> Profile</a>
                   <a class="dropdown-item" href="{% url 'utilizador:logoutUser' %}"><i class="ik ik-power dropdown-icon"></i> Logout</a>
                 </div>
               </div>

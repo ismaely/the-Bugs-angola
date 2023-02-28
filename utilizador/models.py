@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User, Group
+import random, base64
 
 
 class Genero(models.Model):
@@ -23,6 +24,13 @@ class Utilizador(models.Model):
     foto = models.ImageField(upload_to='uploads/foto/%d-%m-%y/', blank=True, null=True, default="user.jpg")
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
+    slug = models.SlugField(max_length=400,null=True, blank=True)
     
     def __str__ (self):
         return '%d' % (self.id)
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.user+'-'+str(random.random()))
+
+        super(Utilizador, self).save(*args, **kwargs)
