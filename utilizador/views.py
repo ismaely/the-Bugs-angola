@@ -17,10 +17,11 @@ from utilizador.models import Utilizador
 
 @login_required
 def set_category_privilege(request):
+    list_group = Group.objects.all()
     context = {}
     return render(request, 'utilizador/set_category_privilege.html')
 
-
+# função responsavel pela listas de todos utilizador 
 @login_required
 def list_users(request):
     list_user = Utilizador.objects.select_related('user').filter(user__is_superuser=False)
@@ -38,6 +39,19 @@ def profil_user(request, slug):
     return render(request, 'utilizador/profil_user.html', context)
 
 
+#função que vai restar a password do utilizador
+@login_required
+def reset_password(request, pk):
+    user = User.objects.get(id=pk)
+    user.set_password(env('PASSWORD_PADRAO'))
+    user.save()
+
+    resp = Utilizador.objects.get(user_id=pk)
+    resp.estadoPassword =False
+    resp.save()
+    return HttpResponseRedirect(reverse('utilizador:list-users'))
+    
+
 #função que vai desativar a conta 
 @login_required
 def active_user(request, pk):
@@ -46,8 +60,6 @@ def active_user(request, pk):
     user.save()
     return HttpResponseRedirect(reverse('utilizador:list-users'))
     
-
-
 
 # função que vai desativar conta de utilizador
 @login_required
