@@ -16,44 +16,39 @@
                 <th>E-mail</th>
                 <th>Telefone</th>
                 <th>Categoria</th>
-                <th>Opção</th>
+                <th>Estado</th>
+                <th>Ação</th>
               </tr>
             </thead>
             <tbody>
+              {% for dados in lista %}
               <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
-              </tr>
-              <tr>
-                <td>Garrett Winters</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>63</td>
-                <td>2011/07/25</td>
-                <td>$170,750</td>
-              </tr>
+                <td>{{ dados.user.first_name }}</td>
+                <td>{{ dados.user.username }}</td>
+                <td>{{ dados.user.email }}</td>
+                <td>{{ dados.telefone }}</td>
+                <td>Nome da categoria</td>
+                <td>Estado da Conta</td>
+                <td>
+                  <ul class="nav nav-pills">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+                        >Acção <i class="ik ik-chevron-down"></i
+                      ></a>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item" href="">Editar</a>
+                        <a class="dropdown-item" href="">Desativar</a>
+                        <a class="dropdown-item" href="">Ativar Conta</a>
+                        <a class="dropdown-item" href="">Resetar Password</a>
+                        <a class="dropdown-item" href="">Eliminar Conta</a>
 
-              <tr>
-                <td>Airi Satou</td>
-                <td>Accountant</td>
-                <td>Tokyo</td>
-                <td>33</td>
-                <td>2008/11/28</td>
-                <td>$162,700</td>
+                        <div class="dropdown-divider"></div>
+                      </div>
+                    </li>
+                  </ul>
+                </td>
               </tr>
-
-              <tr>
-                <td>Sonya Frost</td>
-                <td>Software Engineer</td>
-                <td>Edinburgh</td>
-                <td>23</td>
-                <td>2008/12/13</td>
-                <td>$103,600</td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>

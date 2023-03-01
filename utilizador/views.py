@@ -14,12 +14,20 @@ from utilizador.forms import CategoriaForm, Utilizador_Form, User_Form
 from utilizador.models import Utilizador
 
 
+
+@login_required
+def set_category_privilege(request):
+    context = {}
+    return render(request, 'utilizador/set_category_privilege.html')
+
+
 @login_required
 def list_users(request):
-    #list_user = User.objects.select_related('user').filter(Q(estudante__pessoa__passaporte=bi) )
-    list_user = User.objects.all()
+    list_user = Utilizador.objects.select_related('user').filter(user__is_superuser=False)
+    #list_user = Utilizador.objects.all()
     context = {'lista': list_user}
     return render(request, 'utilizador/list_users.html', context)
+
 
 
 @login_required
@@ -28,6 +36,39 @@ def profil_user(request, slug):
     list_user = User.objects.all()
     context = {'lista': list_user}
     return render(request, 'utilizador/profil_user.html', context)
+
+
+#função que vai desativar a conta 
+@login_required
+def active_user(request, pk):
+    if pk > 0:
+        user = User.objects.get(id=pk)
+        user.is_active = 1
+        user.save()
+        sweetify.success(
+            request, 'Conta Ativado com sucesso!....', timer='4900', button='Ok')
+        return HttpResponseRedirect(reverse('utilizador:listar_utilizador'))
+    else:
+        sweetify.info(request, 'Acesso Negado!Falha....',
+                      timer='4900', button='Ok')
+        return HttpResponseRedirect(reverse('utilizador:listar_utilizador'))
+
+
+
+# função que vai desativar conta de utilizador
+@login_required
+def desativar_conta(request, pk):
+    if pk > 0:
+        user = User.objects.get(id=pk)
+        user.is_active = 0
+        user.save()
+        sweetify.success(
+            request, 'Conta Desativada com sucesso!....', timer='4900', button='Ok')
+        return HttpResponseRedirect(reverse('utilizador:listar_utilizador'))
+    else:
+        sweetify.info(request, 'Acesso Negado!Falha....',
+                      timer='4900', button='Ok')
+        return HttpResponseRedirect(reverse('utilizador:listar_utilizador'))
 
 
 @login_required
