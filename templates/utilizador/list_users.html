@@ -28,7 +28,12 @@
                 <td>{{ dados.user.email }}</td>
                 <td>{{ dados.telefone }}</td>
                 <td>Nome da categoria</td>
-                <td>Estado da Conta</td>
+                {% if dados.user.is_active %}
+                <td class="bg-success"><strong>Conta Ativa </strong></td>
+                {% else %}
+                <td class="bg-danger"><strong>Conta Desativada</strong></td>
+                {% endif %}
+
                 <td>
                   <ul class="nav nav-pills">
                     <li class="nav-item dropdown">
@@ -37,8 +42,11 @@
                       ></a>
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="">Editar</a>
-                        <a class="dropdown-item" href="">Desativar</a>
-                        <a class="dropdown-item" href="">Ativar Conta</a>
+                        {% if dados.user.is_active %}
+                        <a class="dropdown-item" href="{% url 'utilizador:disable-user' dados.user_id %}">Desativar</a>
+                        {% else %}
+                        <a class="dropdown-item" href="{% url 'utilizador:active-user' dados.user_id %}">Ativar Conta</a>
+                        {% endif %}
                         <a class="dropdown-item" href="">Resetar Password</a>
                         <a class="dropdown-item" href="">Eliminar Conta</a>
 

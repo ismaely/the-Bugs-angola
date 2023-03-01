@@ -41,34 +41,21 @@ def profil_user(request, slug):
 #função que vai desativar a conta 
 @login_required
 def active_user(request, pk):
-    if pk > 0:
-        user = User.objects.get(id=pk)
-        user.is_active = 1
-        user.save()
-        sweetify.success(
-            request, 'Conta Ativado com sucesso!....', timer='4900', button='Ok')
-        return HttpResponseRedirect(reverse('utilizador:listar_utilizador'))
-    else:
-        sweetify.info(request, 'Acesso Negado!Falha....',
-                      timer='4900', button='Ok')
-        return HttpResponseRedirect(reverse('utilizador:listar_utilizador'))
+    user = User.objects.get(id=pk)
+    user.is_active = True
+    user.save()
+    return HttpResponseRedirect(reverse('utilizador:list-users'))
+    
 
 
 
 # função que vai desativar conta de utilizador
 @login_required
-def desativar_conta(request, pk):
-    if pk > 0:
-        user = User.objects.get(id=pk)
-        user.is_active = 0
-        user.save()
-        sweetify.success(
-            request, 'Conta Desativada com sucesso!....', timer='4900', button='Ok')
-        return HttpResponseRedirect(reverse('utilizador:listar_utilizador'))
-    else:
-        sweetify.info(request, 'Acesso Negado!Falha....',
-                      timer='4900', button='Ok')
-        return HttpResponseRedirect(reverse('utilizador:listar_utilizador'))
+def disable_user(request, pk):
+    user = User.objects.get(id=pk)
+    user.is_active = False
+    user.save()
+    return HttpResponseRedirect(reverse('utilizador:list-users'))
 
 
 @login_required
