@@ -21,6 +21,8 @@ def set_category_privilege(request):
     context = {}
     return render(request, 'utilizador/set_category_privilege.html')
 
+
+
 # função responsavel pela listas de todos utilizador 
 @login_required
 def list_users(request):
@@ -49,8 +51,10 @@ def reset_password(request, pk):
     resp = Utilizador.objects.get(user_id=pk)
     resp.estadoPassword =False
     resp.save()
+    messages.success(request, 'A password do utilizador foi resetada com sucesso')
     return HttpResponseRedirect(reverse('utilizador:list-users'))
     
+
 
 #função que vai desativar a conta 
 @login_required
@@ -58,8 +62,10 @@ def active_user(request, pk):
     user = User.objects.get(id=pk)
     user.is_active = True
     user.save()
+    messages.success(request, 'Conta ativada com sucesso')
     return HttpResponseRedirect(reverse('utilizador:list-users'))
     
+
 
 # função que vai desativar conta de utilizador
 @login_required
@@ -67,9 +73,12 @@ def disable_user(request, pk):
     user = User.objects.get(id=pk)
     user.is_active = False
     user.save()
+    messages.success(request, 'A conta foi desativada com sucesso')
     return HttpResponseRedirect(reverse('utilizador:list-users'))
 
 
+
+# função que vai registar novo grupo, ou seja nova categoria 
 @login_required
 def add_categoria(request):
     form = CategoriaForm(request.POST or None)
@@ -83,7 +92,6 @@ def add_categoria(request):
                 Group.objects.create(name=request.POST['nome'])
                 messages.success(request, 'Categoria criado com sucesso')
                 form = CategoriaForm()
-    
     context = {'form': form}
     return render(request, 'utilizador/add_categoria.html', context)
 
@@ -110,13 +118,12 @@ def add_newUser(request):
                     resp.save()
                     form = Utilizador_Form()
                     form2 = User_Form()
-                    messages.success(request, 'Conta do utilizador criado com sucesso')
+                    messages.success(request, 'Conta do utilizador foi criado com sucesso')
             except Exception as e:
                 messages.warning(request, 'A conta de utilizador já existe com este username')
-    
     else:
-        form = Utilizador_Form(request.POST or None)
-        form2 = User_Form(request.POST or None)
+        form = Utilizador_Form(request.POST)
+        form2 = User_Form(request.POST)
 
     context = {'form': form,'form2': form2}
     return render(request, 'utilizador/add_newUser.html', context)

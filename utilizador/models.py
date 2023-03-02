@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User, Group
+from django.template.defaultfilters import slugify
 import random, base64
 
 
@@ -31,6 +32,6 @@ class Utilizador(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.user+'-'+str(random.random()))
+            self.slug = slugify(self.user.username+'-'+str(random.random()))
 
         super(Utilizador, self).save(*args, **kwargs)

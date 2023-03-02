@@ -1,1 +1,91 @@
-{% extends 'baseHome.html' %}{% block corpo %}{% load static %} {% endblock %}
+{% extends 'baseHome.html' %}{% block corpo %}{% load static %}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header"><h3>Atribuir previlegios a categoria</h3></div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <form class="sample-form">
+              <div class="form-group">
+                <label for="">Single select box using select 2 </label>
+                <select class="form-control select2">
+                  <option value="cheese">Cheese</option>
+                  <option value="tomatoes">Tomatoes</option>
+                  <option value="mozarella">Mozzarella</option>
+                  <option value="mushrooms">Mushrooms</option>
+                  <option value="pepperoni">Pepperoni</option>
+                  <option value="onions">Onions</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <form class="sample-form">
+              <div class="form-group">
+                <label for="">Multiple select box using select 2 </label>
+                <select class="form-control select2" multiple="multiple">
+                  <option value="cheese">Cheese</option>
+                  <option value="tomatoes">Tomatoes</option>
+                  <option value="mozarella">Mozzarella</option>
+                  <option value="mushrooms">Mushrooms</option>
+                  <option value="pepperoni" selected>Pepperoni</option>
+                  <option value="onions">Onions</option>
+                </select>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-xl-6 mb-30">
+            <h4 class="sub-title">Color Checkbox</h4>
+            <div class="checkbox-color checkbox-default">
+              <input id="checkbox12" type="checkbox" checked="" />
+              <label for="checkbox12"> Default </label>
+            </div>
+            <div class="checkbox-color checkbox-primary">
+              <input id="checkbox18" type="checkbox" checked="" />
+              <label for="checkbox18"> Primary </label>
+            </div>
+            <div class="checkbox-color checkbox-success">
+              <input id="checkbox13" type="checkbox" checked="" />
+              <label for="checkbox13"> Success </label>
+            </div>
+            <div class="checkbox-color checkbox-info">
+              <input id="checkbox14" type="checkbox" checked="" />
+              <label for="checkbox14"> Info </label>
+            </div>
+            <div class="checkbox-color checkbox-warning">
+              <input id="checkbox15" type="checkbox" checked="" />
+              <label for="checkbox15"> Warning </label>
+            </div>
+            <div class="checkbox-color checkbox-danger">
+              <input id="checkbox16" type="checkbox" checked="" />
+              <label for="checkbox16"> Danger </label>
+            </div>
+            <div class="checkbox-color checkbox-default">
+              <input id="checkbox17" type="checkbox" disabled="" />
+              <label for="checkbox17"> Disabled </label>
+            </div>
+          </div>
+          <div class="col-sm-12 col-xl-6 mb-30">
+            <h4 class="sub-title">zoom Checkbox</h4>
+
+            <div class="checkbox-zoom zoom-disable">
+              <label>
+                <input type="checkbox" value="" disabled />
+                <span class="cr">
+                  <i class="cr-icon ik ik-check text-default"></i>
+                </span>
+                <span>Disabled</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -11,6 +11,7 @@ urlpatterns = [
     path('profil_user/<slug:slug>/', views.profil_user, name="profil-user"),
     path('active_user/<int:pk>/', views.active_user, name="active-user"),
     path('disable_user/<int:pk>/', views.disable_user, name="disable-user"),
+    path('reset_password/<int:pk>/', views.reset_password, name="reset-password"),
     path('set_category_privilege', views.set_category_privilege, name="set-category-privilege"),
 
 ]
