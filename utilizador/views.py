@@ -18,7 +18,8 @@ from utilizador.models import Utilizador
 @login_required
 def set_category_privilege(request):
     list_group = Group.objects.all()
-    context = {}
+
+    context = {'lista':list_group}
     return render(request, 'utilizador/set_category_privilege.html')
 
 
@@ -26,6 +27,7 @@ def set_category_privilege(request):
 # função responsavel pela listas de todos utilizador 
 @login_required
 def list_users(request):
+    #print(request.META['REMOTE_ADDR'])
     list_user = Utilizador.objects.select_related('user').filter(user__is_superuser=False)
     #list_user = Utilizador.objects.all()
     context = {'lista': list_user}
