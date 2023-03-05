@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, Permission
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
@@ -10,16 +10,28 @@ from django.shortcuts import redirect
 from AOBug.settings import env
 from django.utils import timezone
 import random, base64
-from utilizador.forms import CategoriaForm, Utilizador_Form, User_Form
+from utilizador.forms import CategoriaForm, Utilizador_Form, User_Form, Categoria_Privilegio_Form
 from utilizador.models import Utilizador
-
 
 
 @login_required
 def set_category_privilege(request):
-    list_group = Group.objects.all()
-
-    context = {'lista':list_group}
+   
+    if request.method == 'POST':
+        form = Categoria_Privilegio_Form(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Privilegio atribuido com sucesso')
+    else:
+        form = Categoria_Privilegio_Form()
+    permissao = Permission.objects.all()
+    categoria = User.objects.all()
+    
+    dis = permissao
+    for x in categoria:
+        print(x.email)
+        
+    context = {'categoria': categoria, 'dados':  dis}
     return render(request, 'utilizador/set_category_privilege.html')
 
 

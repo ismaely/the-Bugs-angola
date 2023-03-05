@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from utilizador.models import Utilizador
 
 
@@ -41,3 +41,12 @@ class User_Form(forms.Form):
                 raise forms.ValidationError("O Username de utilizador já existe...!")
         except User.DoesNotExist:
             return username
+
+
+
+CATEGORIA = Group.objects.all()
+class Categoria_Privilegio_Form(forms.Form):
+    categoria = forms.CharField(max_length=100, widget=forms.Select(choices=CATEGORIA, attrs={'class': 'form-control select2'}))
+    permissao = forms.BooleanField(required=False, widget=forms.TextInput(attrs={'type':'checkbox', 'class': 'form-control' ,'id':'checkbox13'}))
+    
+    
