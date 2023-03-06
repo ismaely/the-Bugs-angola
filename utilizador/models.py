@@ -5,13 +5,6 @@ import random, base64
 
 
 
-class Permissao(models.Model):
-    permissao = models.ForeignKey(Permission, on_delete=models.CASCADE, parent_link=True)
-    name = models.CharField(max_length=15)
-
-    def __str__(self):
-        return "%s" % (self.permissao.name)
-
 
 class Genero(models.Model):
     nome = models.CharField(max_length=15)

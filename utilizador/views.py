@@ -14,9 +14,16 @@ from utilizador.forms import CategoriaForm, Utilizador_Form, User_Form, Categori
 from utilizador.models import Utilizador
 
 
+
+@login_required
+def list_group(request):
+    lista = Group.objects.all()
+    context = {'lista': lista}
+    return render(request, 'utilizador/list_group.html', context)
+
+
 @login_required
 def set_category_privilege(request):
-   
     if request.method == 'POST':
         form = Categoria_Privilegio_Form(request.POST)
         if form.is_valid():
@@ -24,15 +31,11 @@ def set_category_privilege(request):
             messages.success(request, 'Privilegio atribuido com sucesso')
     else:
         form = Categoria_Privilegio_Form()
-    permissao = Permission.objects.all()
-    categoria = User.objects.all()
     
-    dis = permissao
-    for x in categoria:
-        print(x.email)
-        
-    context = {'categoria': categoria, 'dados':  dis}
-    return render(request, 'utilizador/set_category_privilege.html')
+    lista = Group.objects.all()
+    perm = Permission.objects.all()
+    context = {'categoria': lista, 'perm':  perm}
+    return render(request, 'utilizador/set_category_privilege.html', context)
 
 
 
