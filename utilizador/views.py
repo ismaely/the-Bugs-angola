@@ -25,12 +25,16 @@ def list_group(request):
 @login_required
 def set_category_privilege(request):
     if request.method == 'POST':
+        permissao = []
         categoria = request.POST.get('categoria')
         permissao = request.POST.getlist('permissao')
-        
-        print(categoria)
-        print(permissao)
-        #messages.success(request, 'Privilegio atribuido com sucesso')
+        if len(permissao) > 0:
+            group = Group.objects.get(name=categoria)
+            for p in permissao:
+                perm = Permission.objects.get(id=p)
+                group.permissions.add(perm)
+
+            messages.success(request, 'Permissão atribuida com sucesso')
     entidade = Permissao_Nao_Visivel.objects.values_list('tipo').all()
     lista = Group.objects.all()
     perm = Permission.objects.exclude(content_type__in= entidade)
