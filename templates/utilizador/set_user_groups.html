@@ -1,0 +1,74 @@
+{% extends 'baseHome.html' %}{% block corpo %}{% load static %}
+<div class="row">
+  <div class="col-sm-3"></div>
+  <div class="col-sm-6">
+    {% if messages %}
+    <script language="JavaScript">
+      $(function () {
+        $("#exampleModalCenter").modal("show");
+      });
+    </script>
+
+    {% endif %}
+    <div class="card">
+      <div class="card-header"><h3>Adicionar utilizador a um Grupo ou Categoria</h3></div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <form class="sample-form" action="{% url 'utilizador:set-user-groups' %}" method="POST" enctype="multipart/form">
+              {% csrf_token %}
+              <label for="">Seleciona nome de utilizador</label>
+              <div class="input-group">
+                <select class="form-control select2" name="user">
+                  {% for user in listaUser %}
+                  <option value="{{ user.username }}">{{ user.username }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-xl-12">
+                  <label for="">Seleciona a categoria </label>
+                  <div class="input-group">
+                    <select class="form-control select2" name="categoria">
+                      {% for group in categoria %}
+                      <option value="{{ group.name }}">{{ group.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-xl-12">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary btn-block" type="submit">Salvar</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      {% for message in messages %} {% if message.tags == 'warning' %}
+      <div class="modal-header widget bg-danger">
+        {% else %}
+        <div class="modal-header widget bg-success">
+          {% endif %}
+          <h5 class="modal-title" id="exampleModalCenterLabel">Notificação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body"><strong>{{ message }}</strong> <br /></div>
+        {% endfor %}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -14,5 +14,6 @@ urlpatterns = [
     path('reset_password/<int:pk>/', views.reset_password, name="reset-password"),
     path('set_category_privilege', views.set_category_privilege, name="set-category-privilege"),
     path('list_group', views.list_group, name="list-group"),
+    path('set_user_groups', views.set_user_groups, name="set-user-groups"),
 
 ]

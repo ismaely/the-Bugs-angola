@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.hashers import check_password
 from django.urls import reverse, path
 from django.contrib import messages
@@ -15,6 +15,8 @@ from utilizador.models import Utilizador,Permissao_Nao_Visivel
 
 
 
+#função que vai listar todos os grupos ou sej acategorias existente
+#@permission_required('polls.add_choice', login_url='/loginpage/')
 @login_required
 def list_group(request):
     lista = Group.objects.all()
@@ -22,7 +24,28 @@ def list_group(request):
     return render(request, 'utilizador/list_group.html', context)
 
 
+# função que vai colocar um utilizador em um determinado grupo, que tem previlegios ou não 
 @login_required
+def set_user_groups(request):
+    if request.method == 'POST':
+        users = request.POST.get('user')
+        categoria = request.POST.get('categoria')
+        if users is not None and categoria is not None:
+            group = Group.objects.get(name=categoria)
+            user = User.objects.get(username=users)
+            user.groups.add(group)
+            messages.success(request, 'O usuario adicionado no grupo co sucesso')
+
+    list_User = User.objects.all()
+    lista = Group.objects.all()
+    
+    context = {'listaUser': list_User, 'categoria': lista}
+    return render(request, 'utilizador/set_user_groups.html', context)
+
+
+
+# função que vai atribuir previlegios a um determinado grupo 
+@login_required(login_url='/accounts/login/')
 def set_category_privilege(request):
     if request.method == 'POST':
         permissao = []
@@ -46,6 +69,7 @@ def set_category_privilege(request):
 
 # função responsavel pela listas de todos utilizador 
 @login_required
+#@permission_required('polls.add_choice', raise_exception=True)
 def list_users(request):
     #print(request.META['REMOTE_ADDR'])
     list_user = Utilizador.objects.select_related('user').filter(user__is_superuser=False)

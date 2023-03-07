@@ -1,1 +1,65 @@
-{% extends 'baseHome.html' %}{% block corpo %}{% load static %} {% endblock %}
+{% extends 'baseHome.html' %}{% block corpo %}{% load static %}
+<div class="row clearfix">
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="widget bg-primary">
+      <div class="widget-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="state">
+            <h6>Posts</h6>
+            <h2>543</h2>
+          </div>
+          <div class="icon">
+            <i class="ik ik-box"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="widget bg-success">
+      <div class="widget-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="state">
+            <h6>Colaboradores</h6>
+            <h2>3510</h2>
+          </div>
+          <div class="icon">
+            <i class="ik ik-shopping-cart"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="widget bg-warning">
+      <div class="widget-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="state">
+            <h6>Falhas</h6>
+            <h2>$43,567.53</h2>
+          </div>
+          <div class="icon">
+            <i class="ik ik-inbox"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-md-6 col-sm-12">
+    <div class="widget bg-danger">
+      <div class="widget-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="state">
+            <h6>New Users</h6>
+            <h2>11</h2>
+          </div>
+          <div class="icon">
+            <i class="ik ik-users"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
