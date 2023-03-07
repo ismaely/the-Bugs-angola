@@ -6,27 +6,33 @@
       <div class="card-body">
         <div class="row">
           <div class="col-md-12">
-            <form class="sample-form">
+            <form class="sample-form" action="{% url 'utilizador:set-category-privilege' %}" method="POST" enctype="multipart/form">
               {% csrf_token %}
-              <div class="form-group">
-                <label for="">Categoria </label>
-                <select class="form-control" name="grupo">
+              <label for="">Seleciona Categoria </label>
+              <div class="input-group input-group-button">
+                <select class="form-control select2" name="categoria">
                   {% for group in categoria %}
 
                   <option value="{{ group.name }}">{{ group.name }}</option>
                   {% endfor %}
                 </select>
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit">Salvar Permissão</button>
+                </div>
               </div>
               <div class="row">
                 <div class="col-sm-12 col-xl-12 m-3">
                   <h4 class="sub-title">Lista de Previlegios</h4>
                   <div class="row">
-                    <div class="col-sm-4 col-xl-4">
+                    {% for resp in perm %}
+
+                    <div class="col-sm-4 col-xl-3">
                       <div class="">
-                        <input type="checkbox" name="permissao" value="6" />
-                        <label> Adicionar utilizador </label>
+                        <input type="checkbox" name="permissao" value="{{ resp.id }}" />
+                        <label> {{ resp.name }} </label>
                       </div>
                     </div>
+                    {% endfor %}
                   </div>
                 </div>
               </div>

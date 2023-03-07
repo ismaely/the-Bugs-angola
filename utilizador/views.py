@@ -10,8 +10,8 @@ from django.shortcuts import redirect
 from AOBug.settings import env
 from django.utils import timezone
 import random, base64
-from utilizador.forms import CategoriaForm, Utilizador_Form, User_Form, Categoria_Privilegio_Form
-from utilizador.models import Utilizador
+from utilizador.forms import CategoriaForm, Utilizador_Form, User_Form
+from utilizador.models import Utilizador,Permissao_Nao_Visivel
 
 
 
@@ -25,15 +25,16 @@ def list_group(request):
 @login_required
 def set_category_privilege(request):
     if request.method == 'POST':
-        form = Categoria_Privilegio_Form(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Privilegio atribuido com sucesso')
-    else:
-        form = Categoria_Privilegio_Form()
-    
+        categoria = request.POST.get('categoria')
+        permissao = request.POST.getlist('permissao')
+        
+        print(categoria)
+        print(permissao)
+        #messages.success(request, 'Privilegio atribuido com sucesso')
+    entidade = Permissao_Nao_Visivel.objects.values_list('tipo').all()
     lista = Group.objects.all()
-    perm = Permission.objects.all()
+    perm = Permission.objects.exclude(content_type__in= entidade)
+    
     context = {'categoria': lista, 'perm':  perm}
     return render(request, 'utilizador/set_category_privilege.html', context)
 

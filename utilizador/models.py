@@ -1,9 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, User, Group, Permission
+from django.contrib.auth.models import AbstractUser, User, Group, Permission, ContentType
 from django.template.defaultfilters import slugify
 import random, base64
 
 
+# model que permite configurar model que não vão aparecer na lista de previlegios 
+class Permissao_Nao_Visivel(models.Model):
+    tipo = models.ForeignKey(ContentType, on_delete=models.SET_NULL, parent_link=True,blank=True, null=True)
+    descricao = models.CharField(max_length=100, blank=True, null=True)
+    def __str__(self):
+        return '%d' % (self.id)
 
 
 class Genero(models.Model):
@@ -12,7 +18,6 @@ class Genero(models.Model):
 
     def __str__(self):
         return "%s" % (self.nome)
-
 
 
 
