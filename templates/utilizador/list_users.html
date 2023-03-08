@@ -49,7 +49,7 @@
                         >Acção <i class="ik ik-chevron-down"></i
                       ></a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="">Editar</a>
+                        <a class="dropdown-item" href="{% url 'utilizador:update-user' dados.slug %}">Editar</a>
                         {% if dados.user.is_active %}
                         <a class="dropdown-item" href="{% url 'utilizador:disable-user' dados.user_id %}">Desativar</a>
                         {% else %}

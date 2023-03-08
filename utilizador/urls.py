@@ -16,5 +16,5 @@ urlpatterns = [
     path('list_group/', views.list_group, name="list-group"),
     path('set_user_groups/', views.set_user_groups, name="set-user-groups"),
     path('set_privileges_of_user/', views.set_privileges_of_user, name="set-privileges-user"),
-
+    path('update_user/<slug:slug>/', views.update_user, name="update-user"),
 ]

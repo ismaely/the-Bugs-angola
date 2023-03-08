@@ -57,7 +57,7 @@ def set_user_groups(request):
             user.groups.add(group)
             messages.success(request, 'O usuario adicionado no grupo co sucesso')
 
-    list_User = User.objects.all()
+    list_User = User.objects.exclude(is_superuser=True)
     lista = Group.objects.all()
     
     context = {'listaUser': list_User, 'categoria': lista}
@@ -196,6 +196,27 @@ def add_newUser(request):
     return render(request, 'utilizador/add_newUser.html', context)
 
 
+@login_required
+def update_user(request, slug):
+    resp = Utilizador.objects.get(slug=slug)
+    user = User.objects.get(id=resp.user.id)
+    if request.method == 'POST':
+        form = Utilizador_Form(request.POST,request.FILES or None)
+        form2 = User_Form(request.POST)
+        if form2.is_valid() and form.is_valid():
+            username = form2.cleaned_data['username']
+            full_name = form2.cleaned_data['first_name']
+            email = form2.cleaned_data['email']
+            print(request.POST, username, email, full_name)
+            messages.success(request, 'Dados atualizado com sucesso')
+            return HttpResponseRedirect(reverse('utilizador:list-users'))
+
+    else:
+        form = Utilizador_Form(request.POST or None, instance=resp)
+        form2 = User_Form(request.POST or None, 
+        initial={'username': user.username, 'first_name': user.first_name, 'email':user.email})
+    context = {'form': form,'form2': form2, 'pk': resp.slug}
+    return render(request, 'utilizador/add_newUser.html', context)
 
 # função responsavel por tratar da foto 
 @login_required

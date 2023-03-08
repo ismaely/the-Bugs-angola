@@ -30,7 +30,7 @@ class Utilizador_Form(ModelForm):
 class User_Form(forms.Form):
     #password = forms.CharField(max_length=25, required=False, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     username = forms.CharField(max_length=80, min_length=4, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    full_name = forms.CharField(max_length=180, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(max_length=180, widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.CharField(max_length=60, widget=forms.EmailInput(attrs={'class': 'form-control'}))
     
     def clean_usernmae(self):
