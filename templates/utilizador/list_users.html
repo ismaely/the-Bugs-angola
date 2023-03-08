@@ -35,7 +35,7 @@
                 <td>{{ dados.user.username }}</td>
                 <td>{{ dados.user.email }}</td>
                 <td>{{ dados.telefone|phone2numeric }}</td>
-                <td>Nome da categoria</td>
+                <td>{{ dados.group }}</td>
                 {% if dados.user.is_active %}
                 <td class="bg-success"><strong>Conta Ativa </strong></td>
                 {% else %}

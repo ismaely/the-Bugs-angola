@@ -24,6 +24,27 @@ def list_group(request):
     return render(request, 'utilizador/list_group.html', context)
 
 
+@login_required(login_url='/accounts/login/')
+def set_privileges_of_user(request):
+    if request.method == 'POST':
+        permissao = []
+        user = request.POST.get('user')
+        permissao = request.POST.getlist('permissao')
+        if len(permissao) > 0:
+            puser = User.objects.get(username=user)
+            for per in permissao:
+                perm = Permission.objects.get(id=per)
+                puser.user_permissions.add(perm)
+            messages.success(request, 'Permissão atribuida com sucesso')
+
+    entidade = Permissao_Nao_Visivel.objects.values_list('tipo').all()
+    lista = User.objects.exclude(is_superuser=True)
+    perm = Permission.objects.exclude(content_type__in= entidade)
+    context = {'listUser': lista, 'perm':  perm}
+    return render(request, 'utilizador/set_privileges_of_user.html', context)
+
+
+
 # função que vai colocar um utilizador em um determinado grupo, que tem previlegios ou não 
 @login_required
 def set_user_groups(request):
@@ -69,7 +90,7 @@ def set_category_privilege(request):
 
 # função responsavel pela listas de todos utilizador 
 @login_required
-#@permission_required('polls.add_choice', raise_exception=True)
+@permission_required(['utilizador.view_utilizador','user.view_user'], raise_exception=True)
 def list_users(request):
     #print(request.META['REMOTE_ADDR'])
     list_user = Utilizador.objects.select_related('user').filter(user__is_superuser=False)
@@ -168,8 +189,8 @@ def add_newUser(request):
             except Exception as e:
                 messages.warning(request, 'A conta de utilizador já existe com este username')
     else:
-        form = Utilizador_Form(request.POST)
-        form2 = User_Form(request.POST)
+        form = Utilizador_Form(request.POST or None)
+        form2 = User_Form(request.POST or None)
 
     context = {'form': form,'form2': form2}
     return render(request, 'utilizador/add_newUser.html', context)
