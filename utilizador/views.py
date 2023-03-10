@@ -177,9 +177,9 @@ def add_newUser(request):
             try:
                 if form2.is_valid() and form.is_valid():
                     username = form2.cleaned_data['username']
-                    full_name = form2.cleaned_data['full_name']
+                    first_name = form2.cleaned_data['first_name']
                     email = form2.cleaned_data['email']
-                    user = User.objects.create_user(username=username, first_name=full_name,email=email, password=env('PASSWORD_PADRAO'))
+                    user = User.objects.create_user(username=username, first_name=first_name,email=email, password=env('PASSWORD_PADRAO'))
                     resp = form.save(commit=False)
                     resp.user_id = user.id
                     resp.save()
@@ -187,6 +187,7 @@ def add_newUser(request):
                     form2 = User_Form()
                     messages.success(request, 'Conta do utilizador foi criado com sucesso')
             except Exception as e:
+                print(e)
                 messages.warning(request, 'A conta de utilizador já existe com este username')
     else:
         form = Utilizador_Form(request.POST or None)
@@ -196,19 +197,33 @@ def add_newUser(request):
     return render(request, 'utilizador/add_newUser.html', context)
 
 
+
 @login_required
 def update_user(request, slug):
+    print(slug)
     resp = Utilizador.objects.get(slug=slug)
-    user = User.objects.get(id=resp.user.id)
+    user = User.objects.get(id=resp.user_id)
     if request.method == 'POST':
         form = Utilizador_Form(request.POST,request.FILES or None)
         form2 = User_Form(request.POST)
         if form2.is_valid() and form.is_valid():
             username = form2.cleaned_data['username']
-            full_name = form2.cleaned_data['first_name']
+            first_name = form2.cleaned_data['first_name']
             email = form2.cleaned_data['email']
-            print(request.POST, username, email, full_name)
-            messages.success(request, 'Dados atualizado com sucesso')
+            user.username = username
+            user.email = email
+            user.first_name = first_name
+            #user.save()
+            print(form.cleaned_data)
+            #resp.genero = form.cleaned_data['genero']
+            #resp.data_nascimento = form.cleaned_data['data_nascimento']
+            #resp.telefone = form.cleaned_data['telefone']
+            #resp.ndi = form.cleaned_data['ndi']
+            fro = form.save(commit=False)
+            fro.user_id = user.id
+            fro.save()
+            
+            messages.success(request, 'Daos atualizado com sucesso')
             return HttpResponseRedirect(reverse('utilizador:list-users'))
 
     else:

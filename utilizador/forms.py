@@ -1,7 +1,9 @@
 from django import forms
+from django.utils import timezone
 from django.forms import ModelForm
 from django.contrib.auth.models import User, Group
 from utilizador.models import Utilizador
+
 
 
 class LoginForm(forms.Form):
@@ -26,9 +28,19 @@ class Utilizador_Form(ModelForm):
             'genero': forms.Select(attrs={'class': 'form-control'}),
         }
 
+    def clean_data_nascimento(self):
+        data_nascimento = self.cleaned_data.get('data_nascimento')
+        data = []
+        data = data_nascimento.split('-')
+        total = int(timezone.now().year) - int(data[0])
+
+        if int(total) < 15:
+            raise forms.ValidationError("È menor de idade, não é permitido")
+        else:
+            return data_nascimento
+
 
 class User_Form(forms.Form):
-    #password = forms.CharField(max_length=25, required=False, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     username = forms.CharField(max_length=80, min_length=4, widget=forms.TextInput(attrs={'class': 'form-control'}))
     first_name = forms.CharField(max_length=180, widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.CharField(max_length=60, widget=forms.EmailInput(attrs={'class': 'form-control'}))

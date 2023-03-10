@@ -37,8 +37,4 @@ class Utilizador(models.Model):
     def __str__ (self):
         return '%d' % (self.id)
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.user.username+'-'+str(random.random()))
-
-        super(Utilizador, self).save(*args, **kwargs)
+    
