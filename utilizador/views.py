@@ -185,7 +185,7 @@ def add_newUser(request):
                     resp.save()
                     form = Utilizador_Form()
                     form2 = User_Form()
-                    messages.success(request, 'Conta do utilizador foi criado com sucesso')
+                    messages.success(request, 'Conta do utilizador criado com sucesso')
             except Exception as e:
                 print(e)
                 messages.warning(request, 'A conta de utilizador já existe com este username')
@@ -200,9 +200,9 @@ def add_newUser(request):
 
 @login_required
 def update_user(request, slug):
-    print(slug)
     resp = Utilizador.objects.get(slug=slug)
     user = User.objects.get(id=resp.user_id)
+    
     if request.method == 'POST':
         form = Utilizador_Form(request.POST,request.FILES or None)
         form2 = User_Form(request.POST)
@@ -213,16 +213,14 @@ def update_user(request, slug):
             user.username = username
             user.email = email
             user.first_name = first_name
-            #user.save()
-            print(form.cleaned_data)
-            #resp.genero = form.cleaned_data['genero']
-            #resp.data_nascimento = form.cleaned_data['data_nascimento']
-            #resp.telefone = form.cleaned_data['telefone']
-            #resp.ndi = form.cleaned_data['ndi']
-            fro = form.save(commit=False)
-            fro.user_id = user.id
-            fro.save()
-            
+            user.save()
+
+            data = form.cleaned_data
+            data.update({'user_id':user.id})
+            for key, value in data.items():
+                setattr(resp, key, value)
+            resp.save()
+           
             messages.success(request, 'Daos atualizado com sucesso')
             return HttpResponseRedirect(reverse('utilizador:list-users'))
 
