@@ -39,7 +39,6 @@ class Utilizador(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            print('antig------sloug')
             self.slug = slugify(self.user.username+'-'+str(random.random()))
 
         super(Utilizador, self).save(*args, **kwargs)

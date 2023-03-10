@@ -110,11 +110,18 @@
                     <a href="{% url 'utilizador:list-users' %}" class="menu-item">Listar Conta de Utilizador</a>
                     {% endif %}
                     <a href="" class="menu-item">Consultar</a>
+                    {% if perms.group.add_group or perms.categoria.add_categoria %}
+
                     <a href="{% url 'utilizador:add_categoria' %}" class="menu-item">Nova Categoria</a>
+                    {% endif %} {% if perms.group.view_group or perms.categoria.view_categoria %}
                     <a href="{% url 'utilizador:list-group' %}" class="menu-item">Lista Categorias</a>
+                    {% endif %} {% if perms.persission.add_permission or perms.persission.view_permission %}
                     <a href="{% url 'utilizador:set-category-privilege' %}" class="menu-item">Atribuir Previlegios a Categoria </a>
+                    {% endif %} {% if perms.group.add_group or perms.user.add_user %}
                     <a href="{% url 'utilizador:set-user-groups' %}" class="menu-item">Atribuir Categoria a Utilizador</a>
+                    {% endif %} {% if perms.persission.add_permission %}
                     <a href="{% url 'utilizador:set-privileges-user' %}" class="menu-item">Atribuir Previlegios a Utilizador</a>
+                    {% endif %}
                   </div>
                 </div>
                 <!-- <div class="nav-lavel">REPARTIÇÃO DE <br />INVESTIGAÇÃO</div>
