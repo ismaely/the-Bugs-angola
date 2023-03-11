@@ -1,5 +1,4 @@
-{% extends 'baseHome.html' %}{% block corpo %}{% load static %}
-
+{% extends 'baseHome.html' %}{% block corpo %} {% load static %} {% load def_filtro %}
 <div class="row">
   <div class="col-sm-12">
     <div class="card">
@@ -12,23 +11,27 @@
             <thead>
               <tr>
                 <th>Nome</th>
+                <th>Quantidade de usuarios</th>
                 <th>Opção</th>
               </tr>
             </thead>
             <tbody>
-              {% for dados in lista %}
+              {% for dados in lista %} {% get_size_user dados.id as quantidade %}
               <tr>
-                <td>{{ dados.name}}</td>
+                <td>{{ dados.name }}</td>
+                <td class="text-center"><span>{{ quantidade }} </span></td>
                 <td>
                   <ul class="nav nav-pills">
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
                         >Acção <i class="ik ik-chevron-down"> </i
                       ></a>
+
                       <div class="dropdown-menu">
                         <a class="dropdown-item" href="">Editar</a>
                         <a class="dropdown-item" href="">Eliminar</a>
-
+                        <a class="dropdown-item" href="">Visualizar Privilegios</a>
+                        <a class="dropdown-item" href="">Remover Privilegios</a>
                         <div class="dropdown-divider"></div>
                       </div>
                     </li>

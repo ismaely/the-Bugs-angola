@@ -28,13 +28,14 @@
               </tr>
             </thead>
             <tbody>
-              {% for dados in lista %}
+              {% for dados in lista %} {% get_categoria_user dados.user_id as grupo %}
               <tr>
                 <td>{{ dados.user.first_name }}</td>
                 <td>{{ dados.user.username }}</td>
                 <td>{{ dados.user.email }}</td>
                 <td>{{ dados.telefone|phone2numeric }}</td>
-                <td>{{ dados.user.group__name }}</td>
+                <td>{{ grupo.name }}</td>
+
                 {% if dados.user.is_active %}
                 <td class="bg-success"><strong>Conta Ativa </strong></td>
                 {% else %}
@@ -48,6 +49,7 @@
                         >Acção <i class="ik ik-chevron-down"></i
                       ></a>
                       <div class="dropdown-menu">
+                        {% if perms.user_change_user and perms.utilizador_change_utilizador %}
                         <a class="dropdown-item" href="{% url 'utilizador:update-user' dados.slug %}">Editar</a>
                         {% if dados.user.is_active %}
                         <a class="dropdown-item" href="{% url 'utilizador:disable-user' dados.user_id %}">Desativar</a>
@@ -55,7 +57,7 @@
                         <a class="dropdown-item" href="{% url 'utilizador:active-user' dados.user_id %}">Ativar Conta</a>
                         {% endif %}
                         <a class="dropdown-item" href="{% url 'utilizador:reset-password' dados.user_id %}">Resetar Password</a>
-
+                        {% endif %}
                         <div class="dropdown-divider"></div>
                       </div>
                     </li>

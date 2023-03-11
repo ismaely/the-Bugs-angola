@@ -24,6 +24,7 @@ def list_group(request):
     return render(request, 'utilizador/list_group.html', context)
 
 
+# função responsavel por atribuir privilegios a um determinado utilizdor do sistema
 @login_required(login_url='/accounts/login/')
 def set_privileges_of_user(request):
     if request.method == 'POST':
@@ -230,6 +231,8 @@ def update_user(request, slug):
         initial={'username': user.username, 'first_name': user.first_name, 'email':user.email})
     context = {'form': form,'form2': form2, 'pk': resp.slug}
     return render(request, 'utilizador/add_newUser.html', context)
+
+
 
 # função responsavel por tratar da foto 
 @login_required
