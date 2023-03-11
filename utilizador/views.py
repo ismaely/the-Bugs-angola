@@ -93,9 +93,7 @@ def set_category_privilege(request):
 @login_required
 @permission_required(['utilizador.view_utilizador','user.view_user'], raise_exception=True)
 def list_users(request):
-    #print(request.META['REMOTE_ADDR'])
     list_user = Utilizador.objects.select_related('user').filter(user__is_superuser=False)
-    #list_user = Utilizador.objects.all()
     context = {'lista': list_user}
     return render(request, 'utilizador/list_users.html', context)
 
@@ -143,6 +141,26 @@ def disable_user(request, pk):
     user.save()
     messages.success(request, 'A conta foi desativada com sucesso')
     return HttpResponseRedirect(reverse('utilizador:list-users'))
+
+
+
+# função que vai editar o nome da categoria ou seja o grupo
+@login_required
+def update_categoria(request, pk):
+
+    grp = Group.objects.get(id=pk)
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST or None)
+        name=request.POST['nome']
+        grp.name = name
+        grp.save()
+        messages.success(request, 'Categoria atualizada com sucesso')
+        return HttpResponseRedirect(reverse('utilizador:list-group'))
+    else:
+        form = CategoriaForm(request.POST or None, initial={'nome':grp.name})
+    context = {'form': form, 'pk': pk}
+    return render(request, 'utilizador/add_categoria.html', context)
+
 
 
 
