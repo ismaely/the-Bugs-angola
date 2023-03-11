@@ -143,6 +143,12 @@ def disable_user(request, pk):
     return HttpResponseRedirect(reverse('utilizador:list-users'))
 
 
+# função que vai mostrar todos os previlegios de uma categoria
+@login_required
+def show_privilege_categoria(request, pk):
+    perm = Permission.objects.filter(group=pk)
+    context = {'perm': perm}
+    return render(request, 'utilizador/show_privilege_categoria.html', context)
 
 # função que vai editar o nome da categoria ou seja o grupo
 @login_required
