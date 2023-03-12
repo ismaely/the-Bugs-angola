@@ -147,13 +147,14 @@ def disable_user(request, pk):
 @login_required
 def show_privilege_categoria(request, pk):
     perm = Permission.objects.filter(group=pk)
-    context = {'perm': perm}
+    context = {'lista': perm}
     return render(request, 'utilizador/show_privilege_categoria.html', context)
+
+
 
 # função que vai editar o nome da categoria ou seja o grupo
 @login_required
 def update_categoria(request, pk):
-
     grp = Group.objects.get(id=pk)
     if request.method == 'POST':
         form = CategoriaForm(request.POST or None)
@@ -166,7 +167,6 @@ def update_categoria(request, pk):
         form = CategoriaForm(request.POST or None, initial={'nome':grp.name})
     context = {'form': form, 'pk': pk}
     return render(request, 'utilizador/add_categoria.html', context)
-
 
 
 
@@ -188,7 +188,7 @@ def add_categoria(request):
     return render(request, 'utilizador/add_categoria.html', context)
 
 
-
+# função que ser para adicionar um novo utilizador do sistema
 @login_required
 def add_newUser(request):
     if request.method == 'POST':
@@ -222,7 +222,7 @@ def add_newUser(request):
     return render(request, 'utilizador/add_newUser.html', context)
 
 
-
+# Função que vai atualizar os dados do utilizador do sistema
 @login_required
 def update_user(request, slug):
     resp = Utilizador.objects.get(slug=slug)

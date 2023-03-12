@@ -12,33 +12,22 @@
 <div class="row">
   <div class="col-sm-12">
     <div class="row layout-wrap" id="layout-wrap">
-      <div class="col-12 list-item">
-        <div class="card d-flex flex-row mb-3">
-          <a class="d-flex card-img" href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem">
-            <img src="../img/portfolio-1.jpg" alt="Donec sit amet est at sem iaculis aliquam." class="list-thumbnail responsive border-0" />
-            <span class="badge badge-pill badge-primary position-absolute badge-top-left">New</span>
-            <span class="badge badge-pill badge-secondary position-absolute badge-top-left-2">Trending</span>
-          </a>
+      {% for perm in lista %}
+      <div class="col-4 list-item">
+        <div class="card d-flex flex-row mb-2">
           <div class="d-flex flex-grow-1 min-width-zero card-content">
             <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-              <a class="list-item-heading mb-1 w-xs-100" href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem">
-                Donec felis urna, commodo eget velit interdum, malesuada lacinia eros.
-              </a>
+              <a class="list-item-heading mb-1 w-xs-100" href="#editLayoutItem"> {{ perm.name}} </a>
             </div>
             <div class="list-actions">
               <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem"><i class="ik ik-eye"></i></a>
-              <a href="layout-edit-item.html"><i class="ik ik-edit-2"></i></a>
+              <a href="#"><i class="ik ik-edit-2"></i></a>
               <a href="#" class="list-delete"><i class="ik ik-trash-2"></i></a>
-            </div>
-            <div class="custom-control custom-checkbox pl-1 align-self-center">
-              <label class="custom-control custom-checkbox mb-0">
-                <input type="checkbox" class="custom-control-input" />
-                <span class="custom-control-label"></span>
-              </label>
             </div>
           </div>
         </div>
       </div>
+      {% endfor %}
     </div>
   </div>
 </div>
