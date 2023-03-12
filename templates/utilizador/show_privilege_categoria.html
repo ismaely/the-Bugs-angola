@@ -6,6 +6,7 @@
       <div class="card-header">
         <h3 class="d-block">Categoria / Grupo -></h3>
       </div>
+      <span class="hidden groupo-id"> {{ pk }}</span>
     </div>
   </div>
 </div>
@@ -17,12 +18,18 @@
         <div class="card d-flex flex-row mb-2">
           <div class="d-flex flex-grow-1 min-width-zero card-content">
             <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
-              <a class="list-item-heading mb-1 w-xs-100" href="#editLayoutItem"> {{ perm.name}} </a>
+              <a class="list-item-heading w-xs-100" href="#editLayoutItem"> {{ perm.name}} </a>
             </div>
             <div class="list-actions">
               <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem"><i class="ik ik-eye"></i></a>
               <a href="#"><i class="ik ik-edit-2"></i></a>
-              <a href="#" class="list-delete"><i class="ik ik-trash-2"></i></a>
+              <a href="#-{{ perm.id }}" class="remove-privilege-delete"><i class="ik ik-trash-2"></i></a>
+            </div>
+            <div class="custom-control align-self-center">
+              <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" name="valor" value="{{ perm.id }}" id="remove-priv" />
+                <span class="custom-control-label"></span>
+              </label>
             </div>
           </div>
         </div>

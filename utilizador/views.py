@@ -147,7 +147,7 @@ def disable_user(request, pk):
 @login_required
 def show_privilege_categoria(request, pk):
     perm = Permission.objects.filter(group=pk)
-    context = {'lista': perm}
+    context = {'lista': perm, 'pk': pk}
     return render(request, 'utilizador/show_privilege_categoria.html', context)
 
 

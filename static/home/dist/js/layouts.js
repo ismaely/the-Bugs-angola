@@ -10,27 +10,79 @@
         });
     });
     $(document).ready(function () {
-        var listDelete = $('.list-delete');
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var listDelete = $('.remove-privilege-delete');
+
+        /**
+         Função que vai permitir remover a permissão, enviando os dados para o backend
+        */
         listDelete.on('click', function () {
+
             swal({
-                title: "Are you sure?",
-                text: "Do you really want to delete this item?",
+                title: "Desejas remover ?",
+                text: " Tens a ceteza que desejas remover esta permissão?",
                 icon: "warning",
-                buttons: ["Cancel", "Delete Now"],
+                buttons: ["Cancelar", "Delete Agora"],
                 dangerMode: true,
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                        swal({
-                            title: "Deleted",
-                            text: "The list item has been deleted!",
-                            icon: "success",
-                        });
+                        var lista = []
+                        var um = $(this).attr("href");
+                        var valor = document.querySelectorAll("#remove-priv:checked");
+                        for (var i = 0; i < valor.length; i++) {
+                            lista.push(valor[i].value)
+                        }
+                        if (valor.length > 0) {
+                            $.ajax({
+                                url: '/ajax/remove_privilege_categoria/',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    'groupo': $('.groupo-id').text(),
+                                    'lista_perm': lista,
+                                }),
+                                dataType: 'json',
+                                headers: {
+                                    'X-CSRFToken': getCookie('csrftoken'),
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                                },
+                                success: function (data) {
+                                    swal({
+                                        title: "Removido",
+                                        text: "Privilegio removido com sucesso!",
+                                        icon: "success",
+                                    });
+                                }
+
+                            });
+
+                        }
+                        else {
+
+                        }
+
                     } else {
-                        swal("The item is not deleted!");
+                        swal("Operação foi cancelada!");
                     }
+
                 });
         });
+
         $('.html-editor').summernote({
             height: 300,
             tabsize: 2
