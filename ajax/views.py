@@ -14,21 +14,20 @@ def remove_privilege_categoria(request):
             grupo = valor['groupo']
             listaPerm = valor['lista_perm']
 
-            if(len(valor['lista_perm']) > 1):
+            if("#" in str(listaPerm)):
+                aux = str(listaPerm) # o valor  é exemplo #-22
+                ids = aux.split('-')
+                group = Group.objects.get(id=grupo)
+                perm = Permission.objects.get(id=int(ids[1]))
+                group.permissions.remove(perm)
+                
+            else:
                 group = Group.objects.get(id=grupo)
                 for aux in listaPerm:
-                    perm = Permission.objects.get(id=aux)
-                    group.permissions.remove(perm)
-            else:
-                
-                aux = listaPerm.split('-') # o valor é exemplo #-23
-                group = Group.objects.get(id=grupo)
-                perm = Permission.objects.get(id=aux[1])
-                group.permissions.remove(perm)
+                   perm = Permission.objects.get(id=aux)
+                   group.permissions.remove(perm)
 
-            dados = {
-                'resp':  True,
-            }
-        return JsonResponse(dados)
-    except ValueError:
+            dados = {'200': True }
+            return JsonResponse(dados)
+    except Exception as e:
         print("Não foi possivel eliminar permisão")

@@ -47,7 +47,7 @@
                         for (var i = 0; i < valor.length; i++) {
                             lista.push(valor[i].value)
                         }
-                        if (valor.length > 0) {
+                        if (lista.length > 0) {
                             $.ajax({
                                 url: '/ajax/remove_privilege_categoria/',
                                 type: 'POST',
@@ -73,6 +73,32 @@
 
                         }
                         else {
+                            $.ajax({
+                                url: '/ajax/remove_privilege_categoria/',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    'groupo': $('.groupo-id').text(),
+                                    'lista_perm': um,
+                                }),
+                                dataType: 'json',
+                                headers: {
+                                    'X-CSRFToken': getCookie('csrftoken'),
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                                },
+                                success: function (data) {
+                                    swal({
+                                        title: "Removido",
+                                        text: "Privilegio removido com sucesso!!",
+                                        icon: "success",
+                                    });
+                                    if (data) {
+                                        location.reload();
+                                    }
+
+                                }
+
+                            });
 
                         }
 
