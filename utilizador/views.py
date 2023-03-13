@@ -151,6 +151,14 @@ def show_privilege_categoria(request, pk):
     return render(request, 'utilizador/show_privilege_categoria.html', context)
 
 
+@login_required
+def show_all_privilege_user(request, pk):
+    users = User.objects.get(id=pk)
+    perm = Permission.objects.filter(user=pk)
+    context = {'lista': perm, 'pk': pk}
+    return render(request, 'utilizador/show_all_privilege_user.html', context)
+
+
 
 # função que vai editar o nome da categoria ou seja o grupo
 @login_required

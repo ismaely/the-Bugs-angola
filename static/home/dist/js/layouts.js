@@ -66,9 +66,11 @@
                                         title: "Removido",
                                         text: "Privilegio removido com sucesso!",
                                         icon: "success",
+                                        confirmButtonText: 'OK'
+                                    }).then(function () {
+                                        window.location.reload();
                                     });
                                 }
-
                             });
 
                         }
@@ -91,10 +93,10 @@
                                         title: "Removido",
                                         text: "Privilegio removido com sucesso!!",
                                         icon: "success",
+                                        confirmButtonText: 'OK'
+                                    }).then(function () {
+                                        window.location.reload();
                                     });
-                                    if (data) {
-                                        location.reload();
-                                    }
 
                                 }
 
