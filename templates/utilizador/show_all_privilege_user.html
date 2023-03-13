@@ -4,9 +4,9 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="card-header">
-        <h3 class="d-block">Categoria / Grupo -></h3>
+        <h3 class="d-block">Nome: <strong>{{ listUser.first_name|capfirst }}</strong></h3>
       </div>
-      <span class="hidden groupo-id"> {{ pk }}</span>
+      <span class="hidden userId"> {{ pk }}</span>
     </div>
   </div>
 </div>
@@ -23,11 +23,11 @@
             <div class="list-actions">
               <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem"><i class="ik ik-eye"></i></a>
               <a href="#"><i class="ik ik-edit-2"></i></a>
-              <a href="#-{{ perm.id }}" class="remove-privilege-delete"><i class="ik ik-trash-2"></i></a>
+              <a href="#-{{ perm.id }}" class="remove-PrivilegeUser"><i class="ik ik-trash-2"></i></a>
             </div>
             <div class="custom-control align-self-center">
               <label class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" name="valor" value="{{ perm.id }}" id="remove-priv" />
+                <input type="checkbox" class="custom-control-input" name="valor" value="{{ perm.id }}" id="perms-remove-user" />
                 <span class="custom-control-label"></span>
               </label>
             </div>

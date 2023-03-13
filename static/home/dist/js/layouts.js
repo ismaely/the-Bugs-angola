@@ -25,7 +25,91 @@
             }
             return cookieValue;
         }
+
         var listDelete = $('.remove-privilege-delete');
+        var removePrivilegeUser = $('.remove-PrivilegeUser');
+
+        removePrivilegeUser.on('click', function () {
+
+            swal({
+                title: "Desejas remover ?",
+                text: " Tens a ceteza que desejas remover esta permissão?",
+                icon: "warning",
+                buttons: ["Cancelar", "Delete Agora"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var lista = []
+                        var um = $(this).attr("href");
+                        var valor = document.querySelectorAll("#perms-remove-user:checked");
+                        for (var i = 0; i < valor.length; i++) {
+                            lista.push(valor[i].value)
+                        }
+                        if (lista.length > 0) {
+                            $.ajax({
+                                url: '/ajax/remove_privilege_categoria/',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    'groupo': $('.groupo-id').text(),
+                                    'lista_perm': lista,
+                                }),
+                                dataType: 'json',
+                                headers: {
+                                    'X-CSRFToken': getCookie('csrftoken'),
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                                },
+                                success: function (data) {
+                                    swal({
+                                        title: "Removido",
+                                        text: "Privilegio removido com sucesso!",
+                                        icon: "success",
+                                        confirmButtonText: 'OK'
+                                    }).then(function () {
+                                        window.location.reload();
+                                    });
+                                }
+                            });
+
+                        }
+                        else {
+                            $.ajax({
+                                url: '/ajax/remove_privilege_categoria/',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    'groupo': $('.groupo-id').text(),
+                                    'lista_perm': um,
+                                }),
+                                dataType: 'json',
+                                headers: {
+                                    'X-CSRFToken': getCookie('csrftoken'),
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                                },
+                                success: function (data) {
+                                    swal({
+                                        title: "Removido",
+                                        text: "Privilegio removido com sucesso!!",
+                                        icon: "success",
+                                        confirmButtonText: 'OK'
+                                    }).then(function () {
+                                        window.location.reload();
+                                    });
+
+                                }
+
+                            });
+
+                        }
+
+                    } else {
+                        swal("Operação foi cancelada!");
+                    }
+
+                });
+        });
+
 
         /**
          Função que vai permitir remover a permissão, enviando os dados para o backend

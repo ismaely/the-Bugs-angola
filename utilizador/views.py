@@ -151,11 +151,12 @@ def show_privilege_categoria(request, pk):
     return render(request, 'utilizador/show_privilege_categoria.html', context)
 
 
+# Função que vai mostar todos privilegios de um determinado utilizador
 @login_required
 def show_all_privilege_user(request, pk):
     users = User.objects.get(id=pk)
     perm = Permission.objects.filter(user=pk)
-    context = {'lista': perm, 'pk': pk}
+    context = {'lista': perm, 'pk': pk, 'listUser':users}
     return render(request, 'utilizador/show_all_privilege_user.html', context)
 
 

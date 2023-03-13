@@ -19,4 +19,5 @@ urlpatterns = [
     path('update_user/<slug:slug>/', views.update_user, name="update-user"),
     path('update_categoria/<int:pk>/', views.update_categoria, name="update-categoria"),
     path('show_privilege_categoria/<int:pk>/', views.show_privilege_categoria, name="show-privilege-categoria"),
+    path('show_all_privilege_user/<int:pk>/', views.show_all_privilege_user, name="all-privilege-user"),
 ]
