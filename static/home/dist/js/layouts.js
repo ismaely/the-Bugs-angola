@@ -29,8 +29,10 @@
         var listDelete = $('.remove-privilege-delete');
         var removePrivilegeUser = $('.remove-PrivilegeUser');
 
+        /**
+        Função que vai enviar os dados do utilizaodr para remover a permissão desejada
+        */
         removePrivilegeUser.on('click', function () {
-
             swal({
                 title: "Desejas remover ?",
                 text: " Tens a ceteza que desejas remover esta permissão?",
@@ -48,10 +50,10 @@
                         }
                         if (lista.length > 0) {
                             $.ajax({
-                                url: '/ajax/remove_privilege_categoria/',
+                                url: '/ajax/remove_privilege_user/',
                                 type: 'POST',
                                 data: JSON.stringify({
-                                    'groupo': $('.groupo-id').text(),
+                                    'groupo': $('.userId').text(),
                                     'lista_perm': lista,
                                 }),
                                 dataType: 'json',
@@ -75,10 +77,10 @@
                         }
                         else {
                             $.ajax({
-                                url: '/ajax/remove_privilege_categoria/',
+                                url: '/ajax/remove_privilege_user/',
                                 type: 'POST',
                                 data: JSON.stringify({
-                                    'groupo': $('.groupo-id').text(),
+                                    'groupo': $('.userId').text(),
                                     'lista_perm': um,
                                 }),
                                 dataType: 'json',

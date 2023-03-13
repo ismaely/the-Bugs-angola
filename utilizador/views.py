@@ -100,10 +100,10 @@ def list_users(request):
 
 
 @login_required
-def profil_user(request, slug):
-    #list_user = User.objects.select_related('user').filter(Q(estudante__pessoa__passaporte=bi) )
-    list_user = User.objects.all()
-    context = {'lista': list_user}
+def profil_user(request):
+    list_user = Utilizador.objects.get(user=request.user.id)
+    group = Group.objects.get(user=request.user.id)
+    context = {'lista': list_user, 'group': group}
     return render(request, 'utilizador/profil_user.html', context)
 
 
