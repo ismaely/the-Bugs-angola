@@ -33,6 +33,8 @@ class Utilizador(models.Model):
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=250,null=True, blank=True)
+    descricao = models.CharField(max_length=450,blank=True, null=True)
+    
     
     def __str__ (self):
         return '%d' % (self.id)

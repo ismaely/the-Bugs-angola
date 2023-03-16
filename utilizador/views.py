@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group, Permission
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
+#from rolepermissions.decorators import has_permission_decorator
 from django.contrib.auth.hashers import check_password
 from django.urls import reverse, path
 from django.contrib import messages
@@ -91,7 +92,7 @@ def set_category_privilege(request):
 
 # função responsavel pela listas de todos utilizador 
 @login_required
-@permission_required(['utilizador.view_utilizador','user.view_user'], raise_exception=True)
+#@has_permission_decorator(['utilizador.view_utilizador','user.view_user'], raise_exception=True)
 def list_users(request):
     list_user = Utilizador.objects.select_related('user').filter(user__is_superuser=False)
     context = {'lista': list_user}
@@ -101,9 +102,9 @@ def list_users(request):
 
 @login_required
 def profil_user(request):
-    list_user = Utilizador.objects.get(user=request.user.id)
-    group = Group.objects.get(user=request.user.id)
-    context = {'lista': list_user, 'group': group}
+    list_user = Utilizador.objects.get(user_id=request.user.id)
+    group = Group.objects.get(user=request.user)
+    context = {'list_user':list_user, 'group': group}
     return render(request, 'utilizador/profil_user.html', context)
 
 
