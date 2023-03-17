@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'index',
     'bug',
     'utilizador',
+    'auditoria',
     
 ]
 

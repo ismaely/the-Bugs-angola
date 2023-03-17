@@ -43,7 +43,7 @@ class Bug(models.Model):
         return '%d' % self.id
     
     def save(self, *args, **kwargs):
-        if not self.id:
+        if not self.slug:
             self.slug = slugify(self.titulo+'-'+str(date.today())+'-'+str(random.random()))
         super(Bug, self).save(*args, **kwargs)
 
@@ -62,6 +62,6 @@ class Imagem(models.Model):
         return '%d' % self.id
 
     def save(self, *args, **kwargs):
-        if not self.id:
+        if not self.slug:
             self.slug = slugify(self.titulo+'-'+str(date.today())+'-'+str(random.random()))
         super(Imagem, self).save(*args, **kwargs)
