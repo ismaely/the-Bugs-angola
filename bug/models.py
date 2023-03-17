@@ -45,7 +45,6 @@ class Bug(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self.titulo+'-'+str(date.today())+'-'+str(random.random()))
-
         super(Bug, self).save(*args, **kwargs)
 
 
@@ -55,7 +54,9 @@ class Imagem(models.Model):
     arquivos = models.FileField(upload_to="uploads/%d-%m-%yyyy/",blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
+    dataPublicacao = models.DateField(default=date.today())
     slug = models.SlugField(max_length=400,null=True, blank=True)
+    autor = models.ForeignKey(User, on_delete=models.DO_NOTHING, parent_link=True, blank=True, null=True)
 
     def __str__ (self):
         return '%d' % self.id
