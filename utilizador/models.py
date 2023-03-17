@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, User, Group, Permission, ContentType
+from django.contrib.auth.models import AbstractUser, User, ContentType
 from django.template.defaultfilters import slugify
 import random, base64
 
