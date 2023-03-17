@@ -222,7 +222,6 @@ def add_newUser(request):
                     form2 = User_Form()
                     messages.success(request, 'Conta do utilizador criado com sucesso')
             except Exception as e:
-                print(e)
                 messages.warning(request, 'A conta de utilizador já existe com este username')
     else:
         form = Utilizador_Form(request.POST or None)

@@ -60,3 +60,8 @@ class Imagem(models.Model):
 
     def __str__ (self):
         return '%d' % self.id
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self.titulo+'-'+str(date.today())+'-'+str(random.random()))
+        super(Imagem, self).save(*args, **kwargs)
