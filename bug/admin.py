@@ -13,7 +13,7 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 class ImagemAdmin(SummernoteModelAdmin):
     summernote_fields = ('content',)
-    list_display=('titulo', 'arquivos', 'bug')
+    list_display=('titulo', 'arquivos')
 
 admin.site.register(Tipo)
 admin.site.register(Categoria, CategoriaAdmin)
