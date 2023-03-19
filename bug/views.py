@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
+from .forms import BugForm
 # Create your views here.
 
 @login_required
@@ -15,22 +16,19 @@ def home(request):
 @login_required
 def add_new_bug(request):
     if request.method == 'POST':
-        form = Utilizador_Form(request.POST,request.FILES or None)
+        form = BugForm(request.POST,request.FILES or None)
         try:
-            if form2.is_valid() and form.is_valid():
-                username = form2.cleaned_data['username']
-                first_name = form2.cleaned_data['first_name']
+            if form.is_valid():
                 resp = form.save(commit=False)
-                resp.user_id = user.id
                 resp.save()
-                form = Utilizador_Form()
-                messages.success(request, 'Conta do utilizador criado com sucesso')
+                form = BugForm()
+                messages.success(request, 'Criado com sucesso')
         except Exception as e:
-                messages.warning(request, 'A conta de utilizador já existe com este username')
+                messages.warning(request, 'já existe')
     else:
-        form = Utilizador_Form(request.POST or None)
-        form2 = User_Form(request.POST or None)
+        form = BugForm(request.POST or None)
+       
 
-    context = {'form': form,'form2': form2}
-    return render(request, 'utilizador/add_newUser.html', context)
+    context = {'form': form}
+    return render(request, 'bug/add_new_bug.html', context)
 

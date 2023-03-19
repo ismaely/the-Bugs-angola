@@ -34,7 +34,6 @@ class Bug(models.Model):
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=400,null=True, blank=True)
-    #imagem = models.ImageField(upload_to="imagem/%d-%m-%yyyy/", blank=True, null=True)
 
     class Meta:
         ordering = ['-created']
@@ -48,10 +47,26 @@ class Bug(models.Model):
         super(Bug, self).save(*args, **kwargs)
 
 
+class Arquivo(models.Model):
+    bug = models.ForeignKey(Bug, on_delete=models.SET_NULL, parent_link=True, blank=True, null=True)
+    slug = models.SlugField(max_length=400,null=True, blank=True)
+    arquivo = models.FileField(upload_to="uploads/arquivo/%d-%m-%yyyy/",blank=True, null=True)
+    created = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(auto_now_add=True)
+
+    def __str__ (self):
+        return '%d' % self.id
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(str(date.today())+'-'+str(random.random()))
+        super(Imagem, self).save(*args, **kwargs)
+
+
 class Imagem(models.Model):
     titulo = models.CharField(max_length=170, blank=True, null=True)
     content = models.TextField()
-    arquivos = models.FileField(upload_to="uploads/%d-%m-%yyyy/",blank=True, null=True)
+    arquivos = models.FileField(upload_to="uploads/imagem/%d-%m-%yyyy/",blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     dataPublicacao = models.DateField(default=date.today())

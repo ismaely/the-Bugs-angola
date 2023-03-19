@@ -6,8 +6,8 @@ from .models import Bug
 
 
 class BugForm(ModelForm):
-    autor = forms.CharField(max_length=14, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    autor = forms.CharField(max_length=14, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    autor = forms.CharField(max_length=14,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    #descricao = forms.CharField(max_length=4500, required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'id':'message'}))
     class Meta:
         model = Bug
         fields = ['titulo', 'estado', 'tipo', 'categoria', 'dataPublicacao', 'descricao','slug']
@@ -18,4 +18,5 @@ class BugForm(ModelForm):
             'tipo': forms.Select(attrs={'class': 'form-control'}),
             'estado': forms.Select(attrs={'class': 'form-control'}),
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control html-editor', 'rows':'10', 'length': 4500})
         }
