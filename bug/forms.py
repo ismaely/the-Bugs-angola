@@ -14,9 +14,9 @@ class BugForm(ModelForm):
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control'}),
             'dataPublicacao': forms.TextInput(attrs={'type':'date', 'class': 'form-control'}),
-            'categoria': forms.Select(attrs={'class': 'form-control'}),
-            'tipo': forms.Select(attrs={'class': 'form-control'}),
-            'estado': forms.Select(attrs={'class': 'form-control'}),
+            'categoria': forms.Select(attrs={'class': 'form-control select2'}),
+            'tipo': forms.Select(attrs={'class': 'form-control select2'}),
+            'estado': forms.Select(attrs={'class': 'form-control select2'}),
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control html-editor', 'rows':'10', 'length': 4500})
         }
