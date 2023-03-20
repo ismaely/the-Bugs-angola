@@ -6,7 +6,7 @@ from .models import Bug, Arquivo
 
 
 class BugForm(ModelForm):
-    autor = forms.CharField(max_length=14,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    autor_id = forms.CharField(max_length=14,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     #descricao = forms.CharField(max_length=4500, required=False, widget=forms.Textarea(attrs={'class': 'form-control', 'id':'message'}))
     class Meta:
         model = Bug
@@ -23,11 +23,11 @@ class BugForm(ModelForm):
 
 
 class ArquivoForm(forms.ModelForm):
-    bug = forms.CharField(max_length=6,required=False, widget=forms.TextInput(attrs={'class': 'form-control hidden'}))
-    arquivo = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple':True, 'class': 'form-control file-upload-default'}))
+    bug_id = forms.CharField(max_length=6,required=False, widget=forms.TextInput(attrs={'class': 'form-control hidden'}))
+    arquivo = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple':True, 'class': 'file-upload-default '}))
     class Meta:
         model = Bug
-        fields = ['bug', 'slug',  'arquivo']
+        fields = ['slug',  'arquivo']
         widgets = {
             'slug': forms.TextInput(attrs={'class': 'form-control hidden'}),
         }

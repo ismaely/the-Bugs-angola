@@ -6,5 +6,6 @@ app_name = 'bug'
 urlpatterns = [
     path('home', views.home, name="home"),
     path('add_new_bug', views.add_new_bug, name="add-bug"),
+    path('list_all_bug', views.list_all_bug, name="list-all-bug"),
 
 ]

@@ -2,10 +2,19 @@
 
 <div class="row">
   <div class="col-md-12">
+    {% if messages %}
+    <script language="JavaScript">
+      $(function () {
+        $("#exampleModalCenter").modal("show");
+      });
+    </script>
+
+    {% endif %}
     <div class="card">
       <div class="card-header"><h3>Registar nova informação</h3></div>
       <div class="card-body">
         <form class="forms-sample" action="{% url 'bug:add-bug' %}" method="POST" enctype="multipart/form-data">
+          {% csrf_token %} {% autoescape on %}
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
@@ -42,12 +51,12 @@
               </div>
             </div>
             <div class="col-md-6 hidden">
-              <div class="form-group">{{ form.slug }} {{ form.slug.errors }}</div>
+              <div class="form-group">{{ form.slug }} {{ form.slug.errors }} {{ form2.slug }} {{ form2.slug.errors }} {{ form2.bug_id }} {{ form2.bug_id.errors }}</div>
             </div>
           </div>
 
           <div class="form-group">
-            <label>Arquivos</label>
+            <label>Arquivos( Selecona quantidade que deseja)</label>
             {{ form2.arquivo }} {{ form2.arquivo.errors }}
 
             <div class="input-group col-xs-12">
@@ -67,9 +76,31 @@
               </div>
             </div>
           </div>
+          {% endautoescape %}
           <button type="submit" class="btn btn-primary mr-2">SALVAR</button>
           <button class="btn btn-light">Cancel</button>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      {% for message in messages %} {% if message.tags == 'warning' %}
+      <div class="modal-header widget bg-danger">
+        {% else %}
+        <div class="modal-header widget bg-success">
+          {% endif %}
+          <h5 class="modal-title" id="exampleModalCenterLabel">Notificação</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body"><strong>{{ message }}</strong> <br /></div>
+        {% endfor %}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
