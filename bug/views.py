@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
-from .forms import BugForm
+from .forms import BugForm, ArquivoForm
 # Create your views here.
 
 @login_required
@@ -16,9 +16,10 @@ def home(request):
 @login_required
 def add_new_bug(request):
     if request.method == 'POST':
-        form = BugForm(request.POST,request.FILES or None)
+        form = BugForm(request.POST)
+        form2 = ArquivoForm(request.POST,request.FILES or None)
         try:
-            if form.is_valid():
+            if form.is_valid() and form2.is_valid():
                 resp = form.save(commit=False)
                 resp.save()
                 form = BugForm()
@@ -27,8 +28,9 @@ def add_new_bug(request):
                 messages.warning(request, 'já existe')
     else:
         form = BugForm(request.POST or None)
+        form2 = ArquivoForm(request.POST,request.FILES or None)
        
 
-    context = {'form': form}
+    context = {'form': form, 'form2': form2}
     return render(request, 'bug/add_new_bug.html', context)
 

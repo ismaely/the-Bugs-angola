@@ -1,7 +1,7 @@
 from django import forms
 from django.utils import timezone
 from django.forms import ModelForm
-from .models import Bug
+from .models import Bug, Arquivo
 
 
 
@@ -19,4 +19,15 @@ class BugForm(ModelForm):
             'estado': forms.Select(attrs={'class': 'form-control'}),
             'slug': forms.TextInput(attrs={'class': 'form-control'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control html-editor', 'rows':'10', 'length': 4500})
+        }
+
+
+class ArquivoForm(forms.ModelForm):
+    bug = forms.CharField(max_length=6,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    arquivo = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple':True, 'class': 'form-control'}))
+    class Meta:
+        model = Bug
+        fields = ['bug', 'slug',  'arquivo']
+        widgets = {
+            'slug': forms.TextInput(attrs={'class': 'form-control'}),
         }

@@ -69,7 +69,7 @@ class Imagem(models.Model):
     arquivos = models.FileField(upload_to="uploads/imagem/%d-%m-%yyyy/",blank=True, null=True)
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
-    dataPublicacao = models.DateField(default=date.today())
+    dataPublicacao = models.DateField()
     slug = models.SlugField(max_length=400,null=True, blank=True)
     autor = models.ForeignKey(User, on_delete=models.DO_NOTHING, parent_link=True, blank=True, null=True)
 
