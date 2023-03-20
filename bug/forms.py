@@ -17,17 +17,17 @@ class BugForm(ModelForm):
             'categoria': forms.Select(attrs={'class': 'form-control select2'}),
             'tipo': forms.Select(attrs={'class': 'form-control select2'}),
             'estado': forms.Select(attrs={'class': 'form-control select2'}),
-            'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            'slug': forms.TextInput(attrs={'class': 'form-control hidden'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control html-editor', 'rows':'10', 'length': 4500})
         }
 
 
 class ArquivoForm(forms.ModelForm):
-    bug = forms.CharField(max_length=6,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    arquivo = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple':True, 'class': 'form-control'}))
+    bug = forms.CharField(max_length=6,required=False, widget=forms.TextInput(attrs={'class': 'form-control hidden'}))
+    arquivo = forms.FileField(required=False, widget=forms.ClearableFileInput(attrs={'multiple':True, 'class': 'form-control file-upload-default'}))
     class Meta:
         model = Bug
         fields = ['bug', 'slug',  'arquivo']
         widgets = {
-            'slug': forms.TextInput(attrs={'class': 'form-control'}),
+            'slug': forms.TextInput(attrs={'class': 'form-control hidden'}),
         }
