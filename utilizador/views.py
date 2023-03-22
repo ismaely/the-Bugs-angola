@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 #from rolepermissions.decorators import has_permission_decorator
 from django.contrib.auth.hashers import check_password
-from django.urls import reverse, path
+from django.urls import reverse
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect

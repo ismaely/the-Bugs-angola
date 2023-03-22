@@ -3,13 +3,14 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import redirect
 from datetime import date
 import random
 from .forms import BugForm, ArquivoForm
 from .models import Arquivo, Bug
 
-# Create your views here.
+
 
 @login_required
 def home(request):
@@ -25,7 +26,27 @@ def list_all_bug(request):
     return render(request, 'bug/list_all_bug.html', context)
 
 
+# ativar publicação
+@login_required
+def active_bug(request, slug):
+    bg = Bug.objects.get(slug=slug)
+    bg.estado_id = 2
+    bg.save()
+    messages.success(request, 'Publicação ativada com sucesso')
+    return HttpResponseRedirect(reverse('bug:list-all-bug'))
+    
 
+# função que vai desativar a publicação
+@login_required
+def disable_bug(request, slug):
+    bg = Bug.objects.get(slug=slug)
+    bg.estado_id = 3
+    bg.save()
+    messages.warning(request, 'Publicação desativada com sucesso')
+    return HttpResponseRedirect(reverse('bug:list-all-bug'))
+
+
+#registar uma nova falhas
 @login_required
 def add_new_bug(request):
     if request.method == 'POST':
@@ -41,9 +62,9 @@ def add_new_bug(request):
                     arq = Arquivo.objects.create(bug_id=resp.id, arquivo=k)
                 form = BugForm()
                 form2 = ArquivoForm()
-                messages.success(request, 'Dados inserido com sucesso')
+                messages.success(request, 'Informação divulgada com sucesso')
         except Exception as e:
-                messages.warning(request, 'Dados errados, falha interna')
+                messages.warning(request, 'Dados errados, falha interna!')
     else:
         form = BugForm(request.POST or None)
         form2 = ArquivoForm(request.POST,request.FILES or None)

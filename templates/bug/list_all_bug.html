@@ -3,7 +3,19 @@
   {% for dados in lista %}
   <div class="col-sm-12-4 col-md-4 col-xs-4">
     <div class="progress progress-sm">
+      {% if dados.estado.estado == 'Cancelado'%}
       <div class="progress-bar bg-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+
+      {% elif dados.estado.estado == 'Pendente' %}
+      <div class="progress-bar bg-warning" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+
+      {% elif dados.estado.estado == 'Em Analise' %}
+      <div class="progress-bar bg-primary" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+
+      {% else %}
+      <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+
+      {% endif %}
     </div>
     <div class="card">
       <div class="card-body">
@@ -11,9 +23,7 @@
           <img src="{% static 'img/img6.jpg' %}" class="img-fluid" />
           <h4 class="card-title mt-5">{{ dados.titulo }}</h4>
         </div>
-        <p class="text-black">
-          Homemade Cheesecake with Fresh Berries and Mint Homemade Cheesecake with Fresh Berries and Mint Homemade Cheesecake with Fresh Berries and Mint Front End Developer
-        </p>
+        <p class="text-black">{{ dados.descricao|safe|truncatewords:20 }}</p>
         <div class="row">
           <div class="input-group input-group-dropdown">
             <div class="input-group-prepend">
@@ -25,7 +35,11 @@
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#!">Visualizar</a>
                 <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#!">Desativar</a>
+                {% if dados.estado.estado == 'Publicar' or dados.estado.estado == 'Aprovado' %}
+                <a class="dropdown-item" href="{% url 'bug:disable-bug' dados.slug %}">Desativar</a>
+                {% else %}
+                <a class="dropdown-item" href="{% url 'bug:active-bug' dados.slug %}">Ativar (Publicar)</a>
+                {% endif %}
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item btn btn-danger text-black-50" href="#!">Eliminar</a>
               </div>
@@ -38,7 +52,7 @@
         <footer>
           <div class="list-actions mt-5">
             <div class="like-comm text-center">
-              <a href="javascript:void(0)" class="link mr-10 text-muted font-weight-light">09.04.2018</a>
+              <a href="javascript:void(0)" class="link mr-10 text-muted font-weight-light">{{ dados.dataPublicacao }}</a>
               <a href="javascript:void(0)" class="link mr-10">2 comment</a>
               <a href="javascript:void(0)" class="link mr-10"><i class="fa fa-eye text-danger"></i> 5</a>
             </div>
