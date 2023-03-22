@@ -9,5 +9,6 @@ urlpatterns = [
     path('list_all_bug', views.list_all_bug, name="list-all-bug"),
     path('active_bug/<slug:slug>/', views.active_bug, name="active-bug"),
     path('disable_bug/<slug:slug>/', views.disable_bug, name="disable-bug"),
+    path('update_bug/<int:pk>/', views.update_bug, name="update-bug"),
 
 ]

@@ -31,7 +31,7 @@
                 Opções <i class="ik ik-chevron-down"></i>
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#!">Editar</a>
+                <a class="dropdown-item" href="{% url 'bug:update-bug' dados.id %}">Editar</a>
                 <div role="separator" class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#!">Visualizar</a>
                 <div role="separator" class="dropdown-divider"></div>
@@ -52,7 +52,7 @@
         <footer>
           <div class="list-actions mt-5">
             <div class="like-comm text-center">
-              <a href="javascript:void(0)" class="link mr-10 text-muted font-weight-light">{{ dados.dataPublicacao }}</a>
+              <a href="javascript:void(0)" class="link mr-10 text-muted font-weight-light">{{ dados.dataPublicacao|date }}</a>
               <a href="javascript:void(0)" class="link mr-10">2 comment</a>
               <a href="javascript:void(0)" class="link mr-10"><i class="fa fa-eye text-danger"></i> 5</a>
             </div>

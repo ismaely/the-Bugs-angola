@@ -13,7 +13,11 @@
     <div class="card">
       <div class="card-header"><h3>Registar nova informação</h3></div>
       <div class="card-body">
-        <form class="forms-sample" action="{% url 'bug:add-bug' %}" method="POST" enctype="multipart/form-data">
+        {% if pk %}
+        <form class="forms-sample" action="{% url 'bug:update-bug' pk %}" method="POST" enctype="multipart/form-data">
+        {% else %}
+          <form class="forms-sample" action="{% url 'bug:add-bug' %}" method="POST" enctype="multipart/form-data">
+        {% endif %}
           {% csrf_token %} {% autoescape on %}
           <div class="row">
             <div class="col-md-6">
