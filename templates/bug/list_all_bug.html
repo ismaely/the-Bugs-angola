@@ -1,100 +1,53 @@
 {% extends 'baseHome.html' %}{% block corpo %}{% load static %}
 <div class="row">
-  <div class="col-md-4">
+  {% for dados in lista %}
+  <div class="col-sm-12-4 col-md-4 col-xs-4">
+    <div class="progress progress-sm">
+      <div class="progress-bar bg-danger" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+    </div>
     <div class="card">
       <div class="card-body">
         <div class="text-center">
-          <img src="{% static 'img/user.png' %}" class="" width="200" />
-          <h4 class="card-title mt-10">John Doe</h4>
-          <p class="text-black">
-            Homemade Cheesecake with Fresh Berries and Mint Homemade Cheesecake with Fresh Berries and Mint Homemade Cheesecake with Fresh Berries and Mint Front End Developer
-          </p>
-          <div class="row text-center justify-content-md-center"></div>
+          <img src="{% static 'img/img6.jpg' %}" class="img-fluid" />
+          <h4 class="card-title mt-5">{{ dados.titulo }}</h4>
+        </div>
+        <p class="text-black">
+          Homemade Cheesecake with Fresh Berries and Mint Homemade Cheesecake with Fresh Berries and Mint Homemade Cheesecake with Fresh Berries and Mint Front End Developer
+        </p>
+        <div class="row">
+          <div class="input-group input-group-dropdown">
+            <div class="input-group-prepend">
+              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Opções <i class="ik ik-chevron-down"></i>
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#!">Editar</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#!">Visualizar</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#!">Desativar</a>
+                <div role="separator" class="dropdown-divider"></div>
+                <a class="dropdown-item btn btn-danger text-black-50" href="#!">Eliminar</a>
+              </div>
+            </div>
+            <div class="m-2">
+              <a href="javascript:void(0)" class=""> <b>Categoria: </b>{{ dados.categoria }} </a>
+            </div>
+          </div>
         </div>
         <footer>
-          <p class="text-muted text-small mb-0 font-weight-light">09.04.2018</p>
-
-          <div class="list-actions">
-            <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem"><i class="ik ik-eye"></i></a>
-            <a href="layout-edit-item.html"><i class="ik ik-edit-2"></i></a>
-            <a href="#" class="list-delete"><i class="ik ik-trash-2"></i></a>
+          <div class="list-actions mt-5">
+            <div class="like-comm text-center">
+              <a href="javascript:void(0)" class="link mr-10 text-muted font-weight-light">09.04.2018</a>
+              <a href="javascript:void(0)" class="link mr-10">2 comment</a>
+              <a href="javascript:void(0)" class="link mr-10"><i class="fa fa-eye text-danger"></i> 5</a>
+            </div>
           </div>
         </footer>
       </div>
     </div>
   </div>
-  <div class="col-md-12 mb-4 pl-0 pr-0">
-    <div class="owl-container">
-      <div class="basic">
-        <div class="card flex-row col-md-4">
-          <div class="position-relative">
-            <img class="card-img-left" src="{% static 'img/user.png' %}" alt="Card image cap" />
-            <div class="">
-              <div class="card-body">
-                <h6 class="mb-4">Homemade Cheesecake with Fresh Berries and Mint</h6>
-
-                <footer>
-                  <p class="text-muted text-small mb-0 font-weight-light">09.04.2018</p>
-                </footer>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card flex-row">
-          <div class="w-50 position-relative">
-            <img class="card-img-left" src="{% static 'img/user.png' %}" alt="Card image cap" />
-            <span class="badge badge-pill badge-primary position-absolute badge-top-left">New</span>
-          </div>
-          <div class="w-50">
-            <div class="card-body">
-              <h6 class="mb-4">Wedding Cake with Flowers Macarons and Blueberries</h6>
-              <footer>
-                <p class="text-muted text-small mb-0 font-weight-light">09.04.2018</p>
-              </footer>
-            </div>
-          </div>
-        </div>
-
-        <div class="card flex-row">
-          <div class="w-50 position-relative">
-            <img class="card-img-left" src="{% static 'img/user.png' %}" alt="Card image cap" />
-            <span class="badge badge-pill badge-primary position-absolute badge-top-left">New</span>
-          </div>
-          <div class="w-50">
-            <div class="card-body">
-              <h6 class="mb-4">Cheesecake with Chocolate Cookies and Cream Biscuits</h6>
-
-              <footer>
-                <p class="text-muted text-small mb-0 font-weight-light">09.04.2018</p>
-                <div class="list-actions">
-                  <a href="#editLayoutItem" data-toggle="modal" data-target="#editLayoutItem"><i class="ik ik-eye"></i></a>
-                  <a href="layout-edit-item.html"><i class="ik ik-edit-2"></i></a>
-                  <a href="#" class="list-delete"><i class="ik ik-trash-2"></i></a>
-                </div>
-              </footer>
-            </div>
-          </div>
-        </div>
-
-        <div class="card flex-row">
-          <div class="w-50 position-relative">
-            <img class="card-img-left" src="../../img/portfolio-5.jpg" alt="Card image cap" />
-            <span class="badge badge-pill badge-primary position-absolute badge-top-left">New</span>
-          </div>
-          <div class="w-50">
-            <div class="card-body">
-              <h6 class="mb-4">Homemade Cheesecake with Fresh Berries and Mint</h6>
-
-              <footer>
-                <p class="text-muted text-small mb-0 font-weight-light">09.04.2018</p>
-              </footer>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}

@@ -48,7 +48,7 @@ class Bug(models.Model):
 
 
 class Arquivo(models.Model):
-    bug = models.ForeignKey(Bug, on_delete=models.SET_NULL, parent_link=True, blank=True, null=True)
+    bug = models.ForeignKey(Bug, on_delete=models.CASCADE, parent_link=True, blank=True, null=True)
     slug = models.SlugField(max_length=400,null=True, blank=True)
     arquivo = models.FileField(upload_to="uploads/arquivo/%d-%m-%Y/",blank=True, null=True)
     created = models.DateTimeField(auto_now=True)

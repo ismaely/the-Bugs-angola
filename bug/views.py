@@ -20,7 +20,7 @@ def home(request):
 #@permission_required('polls.add_choice', login_url='/loginpage/')
 @login_required
 def list_all_bug(request):
-    lista = Arquivo.objects.all()
+    lista = Bug.objects.all()
     context = {'lista': lista}
     return render(request, 'bug/list_all_bug.html', context)
 
