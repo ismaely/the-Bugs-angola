@@ -31,3 +31,8 @@ class ArquivoForm(forms.ModelForm):
         widgets = {
             'slug': forms.TextInput(attrs={'class': 'form-control hidden'}),
         }
+
+# formulario para pesquisar consulta
+class Search_Form(forms.Form):
+    titulo = forms.CharField(max_length=180, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    

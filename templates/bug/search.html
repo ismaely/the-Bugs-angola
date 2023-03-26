@@ -1,7 +1,6 @@
 {% extends 'baseHome.html' %}{% block corpo %}{% load static %}
 <div class="row">
-  <div class="col-sm-3">
-  </div>
+  <div class="col-sm-3"></div>
   <div class="col-sm-6">
     {% if messages %}
     <script language="JavaScript">
@@ -13,33 +12,23 @@
     {% endif %}
     <div class="card">
       <div class="card-header">
-        {% if pk %}
-        <h3>Atualizar Dados da Categoria</h3>
-        {% else %}
-        <h3>Adicionar Nova Categoria</h3>
-        {% endif %}
+        <h3>Consultar Dados</h3>
       </div>
       <div class="card-body">
         <div class="row">
           <div class="col-md-12">
-           {% if pk %}
-            <form class="forms-sample" action="{% url 'utilizador:update-categoria' pk %}" method="POST">
-            {% else %}
-             <form class="forms-sample" action="{% url 'utilizador:add_categoria' %}" method="POST">
-              {% endif %}  
+            <form class="forms-sample" action="{% url 'bug:get-search' %}" method="POST">
               {% csrf_token %} {% autoescape on %}
-              <label for="">Seleciona Categoria </label>
-              <div class="input-group ">
-                {{ form.nome }}
-              </div>
+              <label for="">Informa o Titulo</label>
+              <div class="input-group">{{ form.titulo }}</div>
               <div class="row">
-                <div class="col-sm-12 ">
-                  {{ form.nome.errors }}
+                <div class="col-sm-12">
+                  {{ form.titulo.errors }}
                   <h4 class="sub-title"></h4>
                   <div class="row">
-                    <div class="col-sm-12 ">
-                        <div class="input-group-append ">
-                         <button class="btn btn-primary btn-block" type="submit">SALVAR</button>
+                    <div class="col-sm-12">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary btn-block" type="submit">CONSULTAR</button>
                       </div>
                     </div>
                   </div>

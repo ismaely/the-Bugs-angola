@@ -1,9 +1,10 @@
-# @author [Gunza Ismael]
-# @email [7ilip@gmail.com]
-# @create date 2023-03-22 11:11:43
-# @modify date 2023-03-22 11:11:43
-# @desc [description]
- 
+"""
+@author [Gunza Ismael]
+@email [7ilip@gmail.com]
+@create date 2023-03-22 11:11:43
+@modify date 2023-03-22 11:11:43
+@desc [description]
+ """
 
 from django.shortcuts import render
 from django.template.defaultfilters import slugify
@@ -11,10 +12,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from datetime import date
-from .forms import BugForm, ArquivoForm
-from .models import Arquivo, Bug
+from .forms import BugForm, ArquivoForm, Search_Form
+from .models import Arquivo, Bug 
 
 
 
@@ -33,9 +34,22 @@ def list_all_bug(request):
     return render(request, 'bug/list_all_bug.html', context)
 
 
+#função para fazer consulta 
+@login_required
+def get_search(request):
+    if request.method == 'POST':
+        lista = Bug.objects.filter(titulo__search=request.POST.get('titulo'))
+        context = {'lista': lista}
+        return render(request, 'bug/list_all_bug.html', context)
+    else:
+        form = Search_Form(request.POST or None)
+    context = {'form': form}
+    return render(request, 'bug/search.html', context)
+
+
 @login_required
 def get_detail(request, slug):
-    lista = object_
+    lista = get_object_or_404(Bug, slug=slug)
     context = {'lista': lista}
     return render(request, 'bug/detail.html', context)
 

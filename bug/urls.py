@@ -11,4 +11,5 @@ urlpatterns = [
     path('disable_bug/<slug:slug>/', views.disable_bug, name="disable-bug"),
     path('update_bug/<int:pk>/', views.update_bug, name="update-bug"),
     path('detail/<slug:slug>/', views.get_detail, name="detail"),
+    path('get_search/', views.get_search, name="get-search"),
 ]

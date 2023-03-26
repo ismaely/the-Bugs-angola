@@ -102,8 +102,13 @@ def list_users(request):
 
 @login_required
 def profil_user(request):
-    list_user = Utilizador.objects.get(user_id=request.user.id)
-    group = Group.objects.get(user=request.user)
+    group = ''
+    try:
+        group = Group.objects.get(user=request.user)
+        list_user = Utilizador.objects.get(user_id=request.user.id)
+
+    except (Group.DoesNotExist):
+        list_user = 'falha'
     context = {'list_user':list_user, 'group': group}
     return render(request, 'utilizador/profil_user.html', context)
 
