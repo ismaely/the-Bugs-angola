@@ -33,7 +33,7 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="{% url 'bug:update-bug' dados.id %}">Editar</a>
                 <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#!">Visualizar</a>
+                <a class="dropdown-item" href="{% url 'bug:detail' dados.slug %}">Visualizar</a>
                 <div role="separator" class="dropdown-divider"></div>
                 {% if dados.estado.estado == 'Publicar' or dados.estado.estado == 'Aprovado' %}
                 <a class="dropdown-item" href="{% url 'bug:disable-bug' dados.slug %}">Desativar</a>

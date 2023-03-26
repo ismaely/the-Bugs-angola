@@ -33,6 +33,13 @@ def list_all_bug(request):
     return render(request, 'bug/list_all_bug.html', context)
 
 
+@login_required
+def get_detail(request, slug):
+    lista = object_
+    context = {'lista': lista}
+    return render(request, 'bug/detail.html', context)
+
+
 # ativar publicação
 @login_required
 def active_bug(request, slug):
