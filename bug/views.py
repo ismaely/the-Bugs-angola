@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import get_object_or_404
 from datetime import date
 from .forms import BugForm, ArquivoForm, Search_Form
 from .models import Arquivo, Bug 
@@ -37,12 +37,15 @@ def list_all_bug(request):
 #função para fazer consulta 
 @login_required
 def get_search(request):
+    form = Search_Form(request.POST or None)
     if request.method == 'POST':
-        lista = Bug.objects.filter(titulo__search=request.POST.get('titulo'))
-        context = {'lista': lista}
-        return render(request, 'bug/list_all_bug.html', context)
-    else:
-        form = Search_Form(request.POST or None)
+        lista = Bug.objects.filter(titulo__icontains=request.POST.get('titulo'))
+        if len(lista) == 0:
+            messages.warning(request,"Dados não encontrado")
+        else:
+            context = {'lista': lista}
+            return render(request, 'bug/list_all_bug.html', context)
+        
     context = {'form': form}
     return render(request, 'bug/search.html', context)
 
