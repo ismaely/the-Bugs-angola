@@ -53,7 +53,10 @@ def get_search(request):
 @login_required
 def get_detail(request, slug):
     lista = get_object_or_404(Bug, slug=slug)
-    context = {'lista': lista}
+    arquivo = Arquivo.objects.filter(bug_id=lista.id)
+    for res in arquivo:
+        print(res.arquivo.name.split('.'))
+    context = {'lista': lista, 'arquivo': arquivo}
     return render(request, 'bug/detail.html', context)
 
 

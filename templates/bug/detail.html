@@ -28,13 +28,26 @@
     </div>
 
     <div class="row">
-      <div class="col-12">
+      <div class="col-sm-12 col-xs-12">
         <p class="lead">Descrição / Informação:</p>
-
         <div class="alert alert-secondary mt-10">{{ lista.descricao|safe|capfirst|escape }}</div>
       </div>
     </div>
-    <div class="row no-print">
+
+    <p class="lead">Dados do Arquivo</p>
+    <div class="row">
+      {% for dados in arquivo %}
+
+      <div class="col-sm-6 col-md-4 col-xs-4">
+        <div class="table-responsive">
+          <img src="{{ dados.arquivo.url }}" alt="AOBug" class="img-fluid rounded" />
+        </div>
+      </div>
+      {% empty %}
+      <p>Não tem imagem para visualização</p>
+      {% endfor %}
+    </div>
+    <div class="row no-print mt-25">
       <div class="col-12">
         <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px"><i class="fa fa-download"></i> Generate PDF</button>
       </div>
