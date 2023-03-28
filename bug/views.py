@@ -17,6 +17,7 @@ from datetime import date
 from .forms import BugForm, ArquivoForm, Search_Form
 from .models import Arquivo, Bug 
 from AOBug.settings import env
+import os
 
 
 
@@ -88,7 +89,7 @@ def disable_bug(request, slug):
     return HttpResponseRedirect(reverse('bug:list-all-bug'))
 
 
-#atualizar dados do bug
+#atualizar dados do bug e o arquivo existente
 @login_required
 def update_bug(request, pk):
     bugs = Bug.objects.get(id=pk)
@@ -98,28 +99,29 @@ def update_bug(request, pk):
         form2 = ArquivoForm(request.POST,request.FILES or None)
         try:
             if form.is_valid() and form2.is_valid():
-                arquivos = request.FILES.getlist('arquivo')
+                novo_arquivos = request.FILES.getlist('arquivo')
                 data = form.cleaned_data
                 
+                # atualização dos dados do Bug
                 data.update({'autor_id':request.user.id})
                 for key, value in data.items():
                     setattr(bugs, key, value)
                 bugs.save()
 
-                # fica pendente, pois ainda falta salvar arquivos 
-                if len(arquivos) == 1 and len(arq) == 1:
-                    print(len(arquivos))
+                # Remover arquivos antes de atualizar
+                if len(novo_arquivos) != 0:
+                    for dados in arq:
+                        if len(dados.arquivo) > 0:
+                            os.remove(dados.arquivo.path)
 
-                #form.save()
-                #for k in arquivos:
-                #arq = Arquivo.objects.create(bug_id=pk, arquivo=k)
-                #form = BugForm()
-                #form2 = ArquivoForm()
+                arq.delete()
+                for k in novo_arquivos:
+                    novoArq = Arquivo.objects.create(bug_id=bugs.id, arquivo=k)
+
                 messages.success(request, 'Informação atualizada com sucesso')
                 return HttpResponseRedirect(reverse('bug:list-all-bug'))
 
         except Exception as e:
-                print(e)
                 messages.warning(request, 'Dados errados na atualização!')
     else:
         form = BugForm(request.POST or None, instance=bugs)
