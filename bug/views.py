@@ -16,6 +16,7 @@ from django.shortcuts import get_object_or_404
 from datetime import date
 from .forms import BugForm, ArquivoForm, Search_Form
 from .models import Arquivo, Bug 
+from AOBug.settings import env
 
 
 
@@ -54,9 +55,16 @@ def get_search(request):
 def get_detail(request, slug):
     lista = get_object_or_404(Bug, slug=slug)
     arquivo = Arquivo.objects.filter(bug_id=lista.id)
+    pdf = False
+    imagem = False
     for res in arquivo:
-        print(res.arquivo.name.split('.'))
-    context = {'lista': lista, 'arquivo': arquivo}
+        exten = res.arquivo.name.split('.')
+        # verficar se é imagem 
+        if exten[1] in env('EXSTENSAO'):
+            imagem = True
+        else:
+            pdf = True
+    context = {'lista': lista, 'arquivo': arquivo, 'pdf': pdf, 'imagem': imagem}
     return render(request, 'bug/detail.html', context)
 
 

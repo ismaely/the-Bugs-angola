@@ -36,16 +36,21 @@
 
     <p class="lead">Dados do Arquivo</p>
     <div class="row">
-      {% for dados in arquivo %}
+      <!-- PARA VISUALIZAR IMAGEM -->
+      {% if imagem %} {% for dados in arquivo %}
 
       <div class="col-sm-6 col-md-4 col-xs-4">
         <div class="table-responsive">
           <img src="{{ dados.arquivo.url }}" alt="AOBug" class="img-fluid rounded" />
         </div>
       </div>
-      {% empty %}
-      <p>Não tem imagem para visualização</p>
-      {% endfor %}
+      <!-- PARA VISUALIZAR PDF -->
+      {% endfor %} {% else %} {% for dados in arquivo %}
+
+      <div class="col-sm-6 col-md-4 col-xs-4">
+        <div class="table-responsive"></div>
+      </div>
+      {% endfor %} {% endif %}
     </div>
     <div class="row no-print mt-25">
       <div class="col-12">
