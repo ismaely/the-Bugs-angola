@@ -47,8 +47,10 @@
       <!-- PARA VISUALIZAR PDF -->
       {% endfor %} {% else %} {% for dados in arquivo %}
 
-      <div class="col-sm-6 col-md-4 col-xs-4">
-        <div class="table-responsive"></div>
+      <div class="col-sm-6 col-md-6 col-xs-4">
+        <div class="table-responsive">
+          <embed src="{{ dados.arquivo.url }}" width="500px" height="700" />
+        </div>
       </div>
       {% endfor %} {% endif %}
     </div>

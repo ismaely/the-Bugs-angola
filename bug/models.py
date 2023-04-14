@@ -34,6 +34,7 @@ class Bug(models.Model):
     created = models.DateTimeField(auto_now=True)
     updated = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(max_length=400,null=True, blank=True)
+    miniDescricao = models.TextField(max_length=100,null=True, blank=True)
 
     class Meta:
         ordering = ['-created']

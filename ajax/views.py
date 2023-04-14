@@ -2,7 +2,30 @@ from django.shortcuts import render
 from django.contrib.auth.models import User, Group, Permission
 from django.http import JsonResponse
 import random, json
+from bug.models import Bug, Arquivo
 # Create your views here.
+
+
+
+def remove_bug(request):
+    try:
+        dados = dict()
+        if request.method == 'POST':
+            valor = []
+            valor = request.body.decode('utf-8')
+            valor = json.loads(valor)
+
+            if(valor):
+                respUser = User.objects.get(id=userId)
+                perm = Permission.objects.get(id=int(ids[1]))
+                respUser.user_permissions.remove(perm)
+                
+
+            dados = {'200': True }
+            return JsonResponse(dados)
+    except Exception as e:
+        print("Não foi possivel eliminar permisão user")
+
 
 
 # Função que vai remover privilegios de um determinado utilizador 
