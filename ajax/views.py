@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group, Permission
 from django.http import JsonResponse
-import random, json
+import random, json, os
 from bug.models import Bug, Arquivo
 # Create your views here.
 
@@ -15,16 +15,19 @@ def remove_bug(request):
             valor = request.body.decode('utf-8')
             valor = json.loads(valor)
 
-            if(valor):
-                respUser = User.objects.get(id=userId)
-                perm = Permission.objects.get(id=int(ids[1]))
-                respUser.user_permissions.remove(perm)
+            arq = Arquivo.objects.filter(bug_id=valor)
+            bugs = Bug.objects.get(id=valor)
+            if len(arq) > 0:
+                for dados in arq:
+                    if len(dados.arquivo) > 0:
+                        os.remove(dados.arquivo.path)
                 
-
+            bugs.delete()
             dados = {'200': True }
             return JsonResponse(dados)
     except Exception as e:
-        print("Não foi possivel eliminar permisão user")
+        dados = {'200': False }
+        return JsonResponse(dados)
 
 
 
@@ -87,3 +90,5 @@ def remove_privilege_categoria(request):
             return JsonResponse(dados)
     except Exception as e:
         print("Não foi possivel eliminar permisão")
+
+
