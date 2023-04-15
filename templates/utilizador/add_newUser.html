@@ -10,11 +10,13 @@
 
     {% endif %}
     <div class="card">
-      <div class="card-header"><h3>Criar conta de Utilizador</h3></div>
-      <div class="card-body">
           {% if pk  %}
+          <div class="card-header"><h3>Atualizar dados da Conta</h3></div>
+      <div class="card-body">
           <form id="regForm" class="forms-sample" action="{% url 'utilizador:update-user' pk %}" method="POST" enctype="multipart/form-data">
           {% else %}
+          <div class="card-header"><h3>Criar conta de Utilizador</h3></div>
+      <div class="card-body">
         <form id="regForm" class="forms-sample" action="{% url 'utilizador:novo-utilizador' %}" method="POST" enctype="multipart/form-data">
           {% endif %}
         

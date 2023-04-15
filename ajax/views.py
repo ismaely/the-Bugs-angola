@@ -3,20 +3,21 @@ from django.contrib.auth.models import User, Group, Permission
 from django.http import JsonResponse
 import random, json, os
 from bug.models import Bug, Arquivo
-# Create your views here.
 
 
 
-def remove_bug(request):
+# função que vai deletar o bugs
+def  deleteBugs(request):
     try:
         dados = dict()
         if request.method == 'POST':
             valor = []
             valor = request.body.decode('utf-8')
             valor = json.loads(valor)
-
-            arq = Arquivo.objects.filter(bug_id=valor)
-            bugs = Bug.objects.get(id=valor)
+            aux = str(valor['post'])
+            ids = aux.split('-')
+            arq = Arquivo.objects.filter(bug_id=ids[1])
+            bugs = Bug.objects.get(id=ids[1])
             if len(arq) > 0:
                 for dados in arq:
                     if len(dados.arquivo) > 0:

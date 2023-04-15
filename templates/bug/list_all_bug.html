@@ -42,7 +42,7 @@
                 <a class="dropdown-item" href="{% url 'bug:active-bug' dados.slug %}">Ativar (Publicar)</a>
                 {% endif %}
                 <div role="separator" class="dropdown-divider"></div>
-                <a class="dropdown-item btn btn-danger text-black-50" href="#!">Eliminar</a>
+                <a class="dropdown-item btn btn-danger text-black-50 deleteBugs" href="#-{{ dados.id }}">Eliminar</a>
               </div>
             </div>
             <div class="m-2">

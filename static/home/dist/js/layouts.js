@@ -28,6 +28,56 @@
 
         var listDelete = $('.remove-privilege-delete');
         var removePrivilegeUser = $('.remove-PrivilegeUser');
+        var deleteBugs = $('.deleteBugs');
+
+        /**
+        função que vai deletar um post de um the bugs
+        */
+        deleteBugs.on('click', function () {
+            swal({
+                title: "Desejas remover ?",
+                text: " Tens a ceteza que desejas remover este post?",
+                icon: "warning",
+                buttons: ["Cancelar", "Delete Agora"],
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var lista = []
+                        var um = $(this).attr("href");
+
+                        $.ajax({
+                            url: '/ajax/deleteBugs/',
+                            type: 'POST',
+                            data: JSON.stringify({
+                                'post': um,
+                            }),
+                            dataType: 'json',
+                            headers: {
+                                'X-CSRFToken': getCookie('csrftoken'),
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                            },
+                            success: function (data) {
+                                swal({
+                                    title: "Removido",
+                                    text: "Post removido com sucesso!!",
+                                    icon: "success",
+                                    confirmButtonText: 'OK'
+                                }).then(function () {
+                                    window.location.reload();
+                                });
+
+                            }
+
+                        });
+
+                    } else {
+                        swal("Operação foi cancelada!");
+                    }
+
+                });
+        });
 
         /**
         Função que vai enviar os dados do utilizaodr para remover a permissão desejada
