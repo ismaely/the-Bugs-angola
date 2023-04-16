@@ -12,7 +12,7 @@ from AOBug.settings import env
 from django.utils import timezone
 import random, base64
 from utilizador.forms import CategoriaForm, Utilizador_Form, User_Form
-from utilizador.models import Utilizador,Permissao_Nao_Visivel
+from utilizador.models import Utilizador,Permissao_Nao_Visivel, Genero
 
 
 
@@ -99,16 +99,15 @@ def list_users(request):
     return render(request, 'utilizador/list_users.html', context)
 
 
-
+#função que vai exibir o perfil de um dado utilizador e os dados da conta
 @login_required
 def profil_user(request):
     group = ''
     try:
-        group = Group.objects.get(user=request.user)
+        #group = Group.objects.get(user=request.user)
         list_user = Utilizador.objects.get(user_id=request.user.id)
-
     except (Group.DoesNotExist):
-        list_user = 'falha'
+        user = Utilizador.objects.create(user_id=request.user.id, genero=Genero(1))
     context = {'list_user':list_user, 'group': group}
     return render(request, 'utilizador/profil_user.html', context)
 

@@ -15,7 +15,7 @@
     <div class="row layout-wrap" id="layout-wrap">
       {% for perm in lista %}
       <div class="col-4 list-item">
-        <div class="card d-flex flex-row mb-2">
+        <div class="card d-flex flex-row">
           <div class="d-flex flex-grow-1 min-width-zero card-content">
             <div class="card-body align-self-center d-flex flex-column flex-md-row justify-content-between min-width-zero align-items-md-center">
               <a class="list-item-heading w-xs-100" href="#editLayoutItem"> {{ perm.name}} </a>
@@ -33,6 +33,13 @@
             </div>
           </div>
         </div>
+      </div>
+      {% empty %}
+      <div class="card bg-warning">
+        <div class="card-header">
+          <h3 class="d-block"><strong>Não possui privilegios</strong></h3>
+        </div>
+        <span class="hidden userId"></span>
       </div>
       {% endfor %}
     </div>

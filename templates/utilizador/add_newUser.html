@@ -11,7 +11,7 @@
     {% endif %}
     <div class="card">
           {% if pk  %}
-          <div class="card-header"><h3>Atualizar dados da Conta</h3></div>
+          <div class="card-header"><h3>Atualizar Dados da conta</h3></div>
       <div class="card-body">
           <form id="regForm" class="forms-sample" action="{% url 'utilizador:update-user' pk %}" method="POST" enctype="multipart/form-data">
           {% else %}
@@ -19,7 +19,6 @@
       <div class="card-body">
         <form id="regForm" class="forms-sample" action="{% url 'utilizador:novo-utilizador' %}" method="POST" enctype="multipart/form-data">
           {% endif %}
-        
           {% csrf_token %} {% autoescape on %}
           <div class="all-steps" id="all-steps"><span class="step"></span> <span class="step"></span> <span class="step"></span> <span class="step"></span></div>
           <div class="tab">
